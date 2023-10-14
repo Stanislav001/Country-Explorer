@@ -30,7 +30,7 @@ export default function App() {
     <NavigationContainer onLayout={onLayoutRootView}>
       <Stack.Navigator>
         <Stack.Screen name='Onboarding' component={Onboarding} options={{ headerShown: false }} />
-
+        
       </Stack.Navigator>
     </NavigationContainer>
   );
