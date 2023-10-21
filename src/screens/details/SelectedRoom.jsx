@@ -3,11 +3,12 @@ import { useRoute } from '@react-navigation/native'
 import AppBar from '../../components/Reusable/AppBar';
 import { COLORS, SIZES, TEXT } from '../../constants/theme';
 import reusable from '../../components/Reusable/reusable';
-import { HeightSpacer, Counter, NetworkImage, Rating, ReusableBtn, ReusableText, WidthSpacer, AssetImage } from '../../components';
+import { Rating } from 'react-native-stock-star-rating';
+import { HeightSpacer, Counter, NetworkImage, ReusableBtn, ReusableText, WidthSpacer, AssetImage } from '../../components';
 
 const SelectedRoom = ({ navigation }) => {
     const router = useRoute();
-    const { item } = router.params;
+    const { item, location } = router.params;
 
     return (
         <View>
@@ -37,15 +38,13 @@ const SelectedRoom = ({ navigation }) => {
                                 color={COLORS.black} />
 
                             <View style={reusable.rowWithSpace('flex-start')}>
-                                <Rating rating={item.rating} />
+                                <Rating
+                                    maxStarts={6}
+                                    bordered={false}
+                                    color={'#FD9942'}
+                                    stars={item?.rating} />
 
                                 <WidthSpacer width={10} />
-
-                                <ReusableText
-                                    text={`(${item.review})`}
-                                    family={'regular'}
-                                    size={SIZES.medium}
-                                    color={COLORS.gray} />
                             </View>
                         </View>
 
@@ -55,7 +54,7 @@ const SelectedRoom = ({ navigation }) => {
                             family={'medium'}
                             size={SIZES.medium}
                             color={COLORS.gray}
-                            text={item.location} />
+                            text={`${location?.StreetAddress}, ${location?.City}, ${location?.Country}, postal code: ${location?.PostalCode}`} />
 
                         <View style={{ borderWidth: 0.5, borderColor: COLORS.lightGrey, marginVertical: 15 }}>
                         </View>
@@ -79,7 +78,7 @@ const SelectedRoom = ({ navigation }) => {
                                 family={'regular'}
                                 size={SIZES.medium}
                                 color={COLORS.black}
-                                text={'$ 400'} />
+                                text={`$ ${item?.price}`} />
                         </View>
 
                         <HeightSpacer height={10} />
@@ -99,7 +98,6 @@ const SelectedRoom = ({ navigation }) => {
                                     family={'regular'}
                                     size={SIZES.medium}
                                     color={COLORS.black} />
-
                             </View>
                         </View>
 
@@ -107,12 +105,11 @@ const SelectedRoom = ({ navigation }) => {
 
                         <View style={reusable.rowWithSpace('space-between')}>
                             <ReusableText
-                                text={'4 Guest'}
+                                text={`${item?.SleepsCount} Guest`}
                                 family={'regular'}
                                 size={SIZES.medium}
                                 color={COLORS.black} />
-
-                            <Counter />
+                            <Counter maxCount={item?.SleepsCount} />
                         </View>
 
                         <HeightSpacer height={15} />

@@ -3,7 +3,6 @@ import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity, View, Text } from 'react-native';
 import { HeightSpacer, NetworkImage, ReusableText } from '../../../components/index';
 
-// 2.50
 const Country = ({ item }) => {
     const navigation = useNavigation();
 

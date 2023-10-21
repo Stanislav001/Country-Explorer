@@ -18,8 +18,6 @@ const Registration = () => {
     const [obscureText, setObscureText] = useState(false);
     const [responseData, setResponseData] = useState(null);
 
-console.log('tes');
-
     return (
         <View style={styles.container}>
             <Formik

@@ -5,10 +5,14 @@ import reusable from './reusable';
 import { COLORS, SIZES } from '../../constants/theme';
 import ReusableText from './ReusableText';
 
-const Counter = ({ }) => {
-    const [count, setCount] = useState(0);
+const Counter = ({ maxCount }) => {
+    const [count, setCount] = useState(1);
 
-    const incrementHandler = () => setCount(count + 1)
+    const incrementHandler = () => {
+        if (count < maxCount){
+            setCount(count + 1)
+        }
+    }
 
     const decrementHandler = () => {
         if (count > 1) {

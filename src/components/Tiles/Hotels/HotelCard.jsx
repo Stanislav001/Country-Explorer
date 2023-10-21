@@ -1,5 +1,5 @@
-import { StyleSheet, View, TouchableOpacity } from 'react-native'
 import { COLORS, SIZES, TEXT } from '../../../constants/theme';
+import { StyleSheet, View, TouchableOpacity } from 'react-native'
 import { NetworkImage, HeightSpacer, ReusableText, Rating, } from '../../../components/index';
 
 const HotelCard = ({ item, margin, onPress }) => {
@@ -14,10 +14,10 @@ const HotelCard = ({ item, margin, onPress }) => {
 
                 <View style={{ padding: 10 }}>
                     <ReusableText
-                        text={item.title}
                         family={'medium'}
                         size={SIZES.medium}
-                        color={COLORS.black} />
+                        color={COLORS.black}
+                        text={item.title} />
 
                     <HeightSpacer height={5} />
 
@@ -25,11 +25,11 @@ const HotelCard = ({ item, margin, onPress }) => {
                         family={'medium'}
                         size={SIZES.medium}
                         color={COLORS.gray}
-                        text={item.location} />
+                        text={item?.address?.City} />
 
                     <HeightSpacer height={5} />
 
-                    <Rating rating={item.rating} />
+                    <Rating rating={item?.rating} />
                 </View>
             </View>
         </TouchableOpacity>
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     card: (margin) => ({
         marginRight: margin,
         width: SIZES.width / 2.2,
-        height: 250,
+        height: 270,
         borderRadius: 16,
         backgroundColor: COLORS.lightWhite
     }),

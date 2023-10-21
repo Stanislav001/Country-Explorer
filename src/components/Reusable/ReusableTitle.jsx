@@ -1,9 +1,9 @@
-import { View, StyleSheet, TouchableOpacity } from 'react-native'
 import reusable from './reusable';
 import { COLORS, TEXT } from '../../constants/theme';
+import { View, StyleSheet, TouchableOpacity } from 'react-native'
 import { NetworkImage, WidthSpacer, HeightSpacer, Rating, ReusableText } from '../../components/index';
 
-const ReusableTitle = ({ item, onPress }) => {
+const ReusableTitle = ({ item, roomAddress, onPress }) => {
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <View style={reusable.rowWithSpace('flex-start')}>
@@ -13,7 +13,7 @@ const ReusableTitle = ({ item, onPress }) => {
 
         <View>
           <ReusableText
-            text={item.title}
+            text={item?.title}
             family={'medium'}
             size={TEXT.medium}
             color={COLORS.black} />
@@ -24,19 +24,20 @@ const ReusableTitle = ({ item, onPress }) => {
             size={14}
             family={'medium'}
             color={COLORS.gray}
-            text={item.location} />
+            text={item?.location || (item?.address ? `${item?.address?.City}, ${item?.address?.Country}` : `${roomAddress?.City}, ${roomAddress?.Country}`)} />
 
           <HeightSpacer height={8} />
 
           <View style={reusable.rowWithSpace('flex-start')}>
-            <Rating rating={item.rating} />
+            <Rating rating={item?.rating} />
+
             <WidthSpacer width={5} />
 
             <ReusableText
               size={14}
               family={'medium'}
               color={COLORS.gray}
-              text={` (${item.review}) `} />
+              text={` (${item?.reviews?.length || 0}) Reviews`} />
           </View>
         </View>
       </View>

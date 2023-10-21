@@ -1,13 +1,13 @@
 import Country from '../Tiles/Country/Country';
 import { HeightSpacer } from '../../components/index';
 import { COLORS, SIZES } from '../../constants/theme';
+import { useGetCountries } from '../../hooks/useCountry';
 import { VirtualizedList, View, ActivityIndicator } from 'react-native';
-import fetchCountries from '../../hooks/fetchCountries';
 
 const Places = () => {
-    const { countries, isLoading, error, } = fetchCountries();
+    const { data: countries, isLoading: isLoadingCountries, error: countriesError, } = useGetCountries();
 
-    if (isLoading) {
+    if (isLoadingCountries) {
         return <ActivityIndicator size={SIZES.xxLarge} color={COLORS.lightBlue} />
     }
 

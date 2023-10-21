@@ -1,6 +1,8 @@
-import { StyleSheet, FlatList, View } from 'react-native'
-import React from 'react'
-import ReviewTitle from '../Tiles/Reviews/ReviewTitle'
+import ReusableText from '../Reusable/ReusableText';
+import { SIZES, COLORS } from '../../constants/theme';
+import ReviewTitle from '../Tiles/Reviews/ReviewTitle';
+import { StyleSheet, FlatList, View } from 'react-native';
+
 const ReviewsList = ({ reviews }) => {
     return (
         <FlatList
@@ -13,7 +15,17 @@ const ReviewsList = ({ reviews }) => {
                     <ReviewTitle review={item} />
                 </View>
             )}
-
+            ListFooterComponent={
+                reviews?.length === 0 ? (
+                    <View style={{ marginBottom: 10 }}>
+                        <ReusableText
+                            family={'regular'}
+                            size={SIZES.medium}
+                            color={COLORS.black}
+                            text={" There are no reviews for this hotel"} />
+                    </View>
+                ) : null
+            }
         />
     )
 }

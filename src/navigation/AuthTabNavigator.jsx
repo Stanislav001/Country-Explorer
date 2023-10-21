@@ -3,6 +3,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import { Registration, Signin } from '../screens/';
 import { COLORS } from '../constants/theme';
 import { AssetImage, HeightSpacer } from '../components';
+
 const Tab = createMaterialTopTabNavigator();
 
 const AuthTabNavigator = () => {
@@ -15,7 +16,7 @@ const AuthTabNavigator = () => {
 
                 <View style={{ height: 600 }}>
                     <Tab.Navigator>
-                        <Tab.Screen name='Signin' component={Signin} />
+                        <Tab.Screen name='Signin' component={Signin} />  
                         <Tab.Screen name='Registration' component={Registration} />
                     </Tab.Navigator>
                 </View>

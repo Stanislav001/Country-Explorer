@@ -1,9 +1,9 @@
+import styles from './home.style';
+import { AntDesign } from '@expo/vector-icons';
+import { TEXT, COLORS } from '../../constants/theme';
+import reusable from '../../components/Reusable/reusable';
 import { View, TouchableOpacity, SafeAreaView } from 'react-native';
 import { HeightSpacer, BestHotels, ReusableText, Recommendations, Places } from '../../components';
-import reusable from '../../components/Reusable/reusable';
-import { TEXT, COLORS, SIZES } from '../../constants/theme';
-import { AntDesign } from '@expo/vector-icons';
-import styles from './home.style';
 
 const Home = ({ navigation }) => {
     return (

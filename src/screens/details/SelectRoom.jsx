@@ -1,57 +1,22 @@
-import { View, FlatList, StyleSheet } from 'react-native';
+import { useRoute } from '@react-navigation/native';
 import AppBar from '../../components/Reusable/AppBar';
 import { COLORS, SIZES } from '../../constants/theme';
-import ReusableTitle from '../../components/Reusable/ReusableTitle';
+import { useGetHotelRooms } from '../../hooks/useHotel';
 import { HeightSpacer, ReusableBtn } from '../../components';
+import ReusableTitle from '../../components/Reusable/ReusableTitle';
+import { View, FlatList, StyleSheet, ActivityIndicator } from 'react-native';
 
 const SelectRoom = ({ navigation }) => {
-    const rooms = [
-        {
-            "_id": "64c631650298a05640539adc",
-            "country_id": "64c62bfc65af9f8c969a8d04",
-            "title": "Walt Disney World",
-            "location": 'U.S.A New York',
-            "imageUrl": "https://d326fntlu7tb1e.cloudfront.net/uploads/731e1f89-c028-43ef-97ee-8beabde696b6-vinci_01_disney.jpg",
-            "rating": 4.7,
-            "review": "1204 Reviews"
-        },
-        {
-            "_id": "64d062a3de20d7c932f1f70a",
-            "country_id": "64c62bfc65af9f8c969a8d04",
-            "title": "Statue of Liberty",
-            "location": 'U.S.A New York',
-            "imageUrl": "https://d326fntlu7tb1e.cloudfront.net/uploads/c3a8b882-b176-47f0-aec5-a0a49bf42fcd-statue-of-liberty-1.webp",
-            "rating": 4.8,
-            "review": "1452 Reviews"
-        },
-        {
-            "_id": "64d09e3f364e1c37c8b4b13c",
-            "country_id": "64c62bfc65af9f8c969a8d04",
-            "title": "Golden Gate Bridge",
-            "imageUrl": "https://d326fntlu7tb1e.cloudfront.net/uploads/7b7b76aa-bbe0-4ca4-b52f-e2b82afa3a77-Golden-Gate-Bridge-San-Francisco.webp",
-            "rating": 4.6,
-            "review": "2145 Reviews"
-        },
-        {
-            "_id": "64d09f90364e1c37c8b4b140",
-            "country_id": "64c62bfc65af9f8c969a8d04",
-            "title": "Yellowstone National Park",
-            "imageUrl": "https://d326fntlu7tb1e.cloudfront.net/uploads/f3f44363-f250-4002-88a8-19fe79169cc7-geyser-yelowstone-burst_h.webp",
-            "rating": 4.8,
-            "review": "24455 Reviews"
-        },
-        {
-            "_id": "64d30f789d008909fa8b7ce5",
-            "country_id": "64d2fd32618522e2fb342eec",
-            "imageUrl": "https://d326fntlu7tb1e.cloudfront.net/uploads/f3f44363-f250-4002-88a8-19fe79169cc7-geyser-yelowstone-burst_h.webp",
-            "title": "Yellowstone National Park",
-            "rating": 4.8,
-            "review": "24455 Reviews"
-        }
-    ];
+    const route = useRoute();
+    const id = route.params;
+    const { data, isLoading: isLoadingRooms, error: roomsError, } = useGetHotelRooms(id);
+
+    if (isLoadingRooms) {
+        return <ActivityIndicator size={SIZES.xxLarge} color={COLORS.lightBlue} />
+    }
 
     return (
-        <View>
+        <View style={{ marginBottom: 100 }}>
             <View style={{ height: 100 }}>
                 <AppBar
                     top={50}
@@ -64,14 +29,14 @@ const SelectRoom = ({ navigation }) => {
             </View>
 
             <FlatList
-                data={rooms}
+                data={data?.rooms}
                 keyExtractor={(item) => item._id}
                 showsVerticalScrollIndicator={false}
-                contentContainerStyle={{ columnGap: SIZES.medium }}
+                contentContainerStyle={{ columnGap: SIZES.medium, marginBottom: 10 }}
                 renderItem={({ item }) => (
                     <View style={styles.tileColumn}>
                         <View style={styles.tile}>
-                            <ReusableTitle item={item} />
+                            <ReusableTitle item={item} roomAddress={data?.address} />
 
                             <HeightSpacer height={10} />
 
@@ -83,13 +48,15 @@ const SelectRoom = ({ navigation }) => {
                                     width={SIZES.width - 50}
                                     borderColor={COLORS.green}
                                     backgroundColor={COLORS.green}
-                                    onPress={() => navigation.navigate('SelectedRoom', { item })}
+                                    onPress={() => navigation.navigate('SelectedRoom', { item, location: data?.address })}
                                 />
                             </View>
                         </View>
                     </View>
                 )}
             />
+
+            <HeightSpacer height={100} />
         </View>
     )
 }

@@ -3,44 +3,24 @@ import { useRoute } from '@react-navigation/native';
 import AppBar from '../../components/Reusable/AppBar';
 import reusable from '../../components/Reusable/reusable';
 import { COLORS, TEXT, SIZES } from '../../constants/theme';
-import { ScrollView, View, TouchableOpacity, StyleSheet } from 'react-native'
+import { ScrollView, View, TouchableOpacity, StyleSheet, ActivityIndicator } from 'react-native'
 import { NetworkImage, PopularList, ReusableBtn, ReusableText, DescriptionText, HeightSpacer } from '../../components/index';
+
+import { useGetCountry } from '../../hooks/useCountry';
 
 const CountryDetails = ({ navigation }) => {
     const route = useRoute();
-
     const { item } = route.params;
+    const { data: country, isLoading: isLoadingCountry, error: countryError, } = useGetCountry(item?._id);
 
-    const country = {
-        "_id": "64c62bfc65af9f8c969a8d04",
-        "country": "USA",
-        "description": "The USA is a tourist magnet, known for its diverse landscapes, rich history, and vibrant culture. From the sun-kissed beaches of California to the bustling streets of New York City, there's something for every traveler.The USA is a tourist magnet, known for its diverse landscapes, rich history, and vibrant culture. From the sun-kissed beaches of California to the bustling streets of New York City, there's something for every traveler.The USA is a tourist magnet, known for its diverse landscapes, rich history, and vibrant culture. From the sun-kissed beaches of California to the bustling streets of New York City, there's something for every traveler.The USA is a tourist magnet, known for its diverse landscapes, rich history, and vibrant culture. From the sun-kissed beaches of California to the bustling streets of New York City, there's something for every traveler.",
-        "imageUrl": "https://d326fntlu7tb1e.cloudfront.net/uploads/1bcdbbd0-d702-475d-92ea-d9171c041674-vinci_01_places_new_york.jpg",
-        "popular": [
-            {
-                "_id": "64c631650298a05640539adc",
-                "title": "Walt Disney World",
-                "imageUrl": "https://d326fntlu7tb1e.cloudfront.net/uploads/731e1f89-c028-43ef-97ee-8beabde696b6-vinci_01_disney.jpg",
-                "rating": 4.7,
-                "review": "1204 Reviews",
-                "location": "Orlando, USA"
-            },
-            {
-                "_id": "64d062a3de20d7c932f1f70a",
-                "title": "Statue of Liberty",
-                "imageUrl": "https://d326fntlu7tb1e.cloudfront.net/uploads/c3a8b882-b176-47f0-aec5-a0a49bf42fcd-statue-of-liberty-1.webp",
-                "rating": 4.8,
-                "review": "1452 Reviews",
-                "location": "Liberty Island, New York Harbor"
-            }
-        ],
-        "region": "North America, USA"
+    if (isLoadingCountry) {
+        return <ActivityIndicator size={SIZES.xxLarge} color={COLORS.lightBlue} />
     }
 
     return (
         <ScrollView>
             <View>
-                <NetworkImage source={country.imageUrl} width={'100%'} height={350} borderRadius={30} />
+                <NetworkImage source={country?.imageUrl} width={'100%'} height={350} borderRadius={30} />
 
                 <AppBar
                     top={40}
@@ -49,7 +29,7 @@ const CountryDetails = ({ navigation }) => {
                     icon={'search1'}
                     color={COLORS.white}
                     color1={COLORS.white}
-                    title={country.country}
+                    title={country?.country}
                     onPress={() => navigation.goBack()}
                     onPress1={() => navigation.navigate('HotelSearch')}
                 />
@@ -60,9 +40,9 @@ const CountryDetails = ({ navigation }) => {
                     family={'medium'}
                     size={TEXT.xLarge}
                     color={COLORS.black}
-                    text={country.region} />
+                    text={country?.region} />
 
-                <DescriptionText text={country.description} />
+                <DescriptionText text={country?.description} />
 
                 <View style={{ alignContent: 'center' }}>
                     <HeightSpacer height={10} />
@@ -81,7 +61,7 @@ const CountryDetails = ({ navigation }) => {
 
                     <HeightSpacer height={10} />
 
-                    <PopularList data={country.popular} />
+                    <PopularList data={country?.popular} />
 
                     <ReusableBtn
                         borderWidth={0}
@@ -90,7 +70,7 @@ const CountryDetails = ({ navigation }) => {
                         borderColor={COLORS.green}
                         btnText={"Find Best Hotels"}
                         backgroundColor={COLORS.green}
-                        onPress={() => navigation.navigate('HotelSearch', item?._id)}
+                        onPress={() => navigation.navigate('HotelSearch', country?._id)}
                     />
 
                     <HeightSpacer height={15} />
