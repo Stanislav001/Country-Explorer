@@ -7,6 +7,9 @@ import { COLORS, SIZES } from '../../constants/theme';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { HeightSpacer, ReusableBtn, WidthSpacer } from '../../components';
 
+import { useAuth } from '../../context/auth-context';
+import { registerUser } from '../../services/authService';
+
 const validationSchema = Yup.object().shape({
     username: Yup.string().min(3, 'Username must be at least 3 characters').required('Required'),
     password: Yup.string().min(8, 'Password must be at least 8 characters').required('Required'),
@@ -14,15 +17,22 @@ const validationSchema = Yup.object().shape({
 });
 
 const Registration = () => {
-    const [loader, setLoader] = useState(false);
-    const [obscureText, setObscureText] = useState(false);
-    const [responseData, setResponseData] = useState(null);
+    const [obscureText, setObscureText] = useState(true);
+    const { changeCurrentUser, setIsLoaded, isLoaded } = useAuth();
+
+    const onSubmitHandler = async (values) => {
+        setIsLoaded(true);
+        let result = await registerUser(values);
+        await changeCurrentUser(result?.data?.token);
+        navigation.navigate('Bottom');
+        setIsLoaded(false);
+    }
 
     return (
         <View style={styles.container}>
             <Formik
-                onSubmit={(values) => { }}
                 validationSchema={validationSchema}
+                onSubmit={values => onSubmitHandler(values)}
                 initialValues={{ username: '', email: '', password: '' }}
             >
                 {({ handleChange, touched, handleSubmit, values, errors, isValid, setFieldTouched }) => (
@@ -40,7 +50,7 @@ const Registration = () => {
                                         value={values.username}
                                         autoCapitalize="none"
                                         styles={{ flex: 1, }}
-                                        placeholder='Enter username'
+                                        placeholder='Username'
                                         onChangeText={handleChange('username')}
                                         onFocus={() => { setFieldTouched('username') }}
                                         onBlur={() => { setFieldTouched('username', "") }}
@@ -65,7 +75,7 @@ const Registration = () => {
                                         value={values.email}
                                         autoCapitalize="none"
                                         styles={{ flex: 1, }}
-                                        placeholder='Enter email'
+                                        placeholder='Email'
                                         onChangeText={handleChange('email')}
                                         onFocus={() => { setFieldTouched('email') }}
                                         onBlur={() => { setFieldTouched('email', "") }}
@@ -85,12 +95,12 @@ const Registration = () => {
 
                                     <WidthSpacer width={10} />
 
-                                    <View style={{ flex: 1,  display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row' }}>
+                                    <View style={{ flex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row' }}>
                                         <TextInput
                                             autoCorrect={false}
                                             autoCapitalize="none"
                                             value={values.password}
-                                            placeholder='Enter password'
+                                            placeholder='Password'
                                             secureTextEntry={obscureText}
                                             onChangeText={handleChange('password')}
                                             onFocus={() => { setFieldTouched('password') }}

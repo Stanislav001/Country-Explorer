@@ -1,10 +1,12 @@
-import { Text, View, TextInput, TouchableOpacity } from 'react-native'
-import styles from './signin.style'
-import { Formik } from 'formik'
 import * as Yup from 'yup';
+import { Formik } from 'formik';
 import { useState } from 'react';
+import styles from './signin.style';
+import { useAuth } from '../../context/auth-context';
 import { COLORS, SIZES } from '../../constants/theme';
+import { loginUser } from '../../services/authService';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Text, View, TextInput, TouchableOpacity } from 'react-native';
 import { HeightSpacer, ReusableBtn, WidthSpacer } from '../../components';
 
 const validationSchema = Yup.object().shape({
@@ -12,17 +14,34 @@ const validationSchema = Yup.object().shape({
     email: Yup.string().email('Provide a valid email').required('Required')
 });
 
-const Signin = () => {
-    const [loader, setLoader] = useState(false);
-    const [obscureText, setObscureText] = useState(false);
-    const [responseData, setResponseData] = useState(null);
+const Signin = ({ navigation }) => {
+    const [obscureText, setObscureText] = useState(true);
+    const { changeCurrentUser, setIsLoaded } = useAuth();
+
+    async function onSubmitHandler(values) {
+        setIsLoaded(true);
+
+        try {
+            let result = await loginUser(values);
+
+            if (result?.status === 200) {
+                await changeCurrentUser(result?.data?.token);
+
+                navigation.navigate('Bottom');
+            }
+        } catch (error) {
+
+        }
+        setIsLoaded(false);
+    }
+
 
     return (
         <View style={styles.container}>
             <Formik
-                onSubmit={(values) => { }}
                 validationSchema={validationSchema}
                 initialValues={{ email: '', password: '' }}
+                onSubmit={values => onSubmitHandler(values)}
             >
                 {({ handleChange, touched, handleSubmit, values, errors, isValid, setFieldTouched }) => (
                     <View>
@@ -59,7 +78,7 @@ const Signin = () => {
 
                                     <WidthSpacer width={10} />
 
-                                    <View style={{ flex: 1,  display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row' }}>
+                                    <View style={{ flex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row' }}>
                                         <TextInput
                                             autoCorrect={false}
                                             autoCapitalize="none"

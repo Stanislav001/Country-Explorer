@@ -2,6 +2,7 @@ import { FlatList } from 'react-native';
 import { Slides } from '../../components';
 
 const Onboarding = () => {
+
     const slides = [
         {
             id: 1,

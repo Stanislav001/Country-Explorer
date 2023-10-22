@@ -5,13 +5,16 @@ import { COLORS, SIZES } from '../constants/theme';
 import { HeightSpacer, NetworkImage, ReusableText } from '../components';
 import AppBar from '../components/Reusable/AppBar';
 import styles from './topTab.style';
+import { useAuth } from '../context/auth-context';
+
 
 const Tab = createMaterialTopTabNavigator();
 
-const TopTab = () => {
+const TopTab = ({ navigation }) => {
+    const { currentUser, logoutHandler } = useAuth();
+
     return (
         <View style={{ flex: 1 }}>
-
             <View style={{ backgroundColor: COLORS.lightWhite }}>
                 <View>
                     <NetworkImage
@@ -26,7 +29,10 @@ const TopTab = () => {
                         left={20}
                         right={20}
                         icon={'logout'}
-                        onPress1={() => { }}
+                        onPress1={() => {
+                            logoutHandler();
+                            navigation.navigate('Auth')
+                        }}
                         color={COLORS.white}
                         color1={COLORS.white}
                     />
@@ -34,7 +40,7 @@ const TopTab = () => {
                     <View style={styles.profile}>
                         <Image
                             style={styles.image}
-                            source={{ uri: 'https://d326fntlu7tb1e.cloudfront.net/uploads/c87b6dfb-ee4b-47fa-9c02-6ccca2893a6f-vinci_06.jpg' }} />
+                            source={{ uri: currentUser?.profile }} />
 
                         <HeightSpacer height={5} />
 
@@ -42,7 +48,7 @@ const TopTab = () => {
                             <View style={{ alignItems: 'center' }}>
                                 <ReusableText
                                     family={'medium'}
-                                    text={'Username'}
+                                    text={currentUser?.username}
                                     size={SIZES.medium}
                                     color={COLORS.black} />
                             </View>

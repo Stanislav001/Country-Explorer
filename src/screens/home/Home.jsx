@@ -5,16 +5,20 @@ import reusable from '../../components/Reusable/reusable';
 import { View, TouchableOpacity, SafeAreaView } from 'react-native';
 import { HeightSpacer, BestHotels, ReusableText, Recommendations, Places } from '../../components';
 
+import { useAuth } from '../../context/auth-context';
+
 const Home = ({ navigation }) => {
+    const { currentUser } = useAuth();
+
     return (
         <SafeAreaView style={reusable.container}>
             <View>
                 <View style={reusable.rowWithSpace('space-between')}>
                     <ReusableText
                         size={TEXT.large}
-                        text={'Hey Stas'}
                         family={'regular'}
-                        color={COLORS.black} />
+                        color={COLORS.black} 
+                        text={`Hey ${currentUser?.username}`}/>
 
                     <TouchableOpacity style={styles.box} onPress={() => navigation.navigate('Search')}>
                         <AntDesign name='search1' size={26} />
