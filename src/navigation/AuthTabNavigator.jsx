@@ -1,8 +1,8 @@
-import { ScrollView, Text, View } from 'react-native'
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
-import { Registration, Signin } from '../screens/';
 import { COLORS } from '../constants/theme';
+import { ScrollView, View } from 'react-native'
+import { Registration, Signin } from '../screens/';
 import { AssetImage, HeightSpacer } from '../components';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -15,9 +15,10 @@ const AuthTabNavigator = () => {
                 <AssetImage mode={'contain'} width={'100%'} height={250} source={require('../assets/images/bg2.png')} />
 
                 <View style={{ height: 600 }}>
+
                     <Tab.Navigator>
-                        <Tab.Screen name='Signin' component={Signin} />  
-                        <Tab.Screen name='Registration' component={Registration} />
+                        <Tab.Screen name='Signin' component={Signin} options={{ headerShown: false }} />
+                        <Tab.Screen name='Registration' component={Registration} options={{ headerShown: false }} />
                     </Tab.Navigator>
                 </View>
             </ScrollView>

@@ -23,7 +23,7 @@ const Slides = ({ item }) => {
                     textColor={COLORS.white}
                     backgroundColor={COLORS.red}
                     width={(SIZES.width - 50) / 2.2}
-                    onPress={() => navigation.navigate('Bottom')}
+                    onPress={() => navigation.navigate('Auth')}
                 />
             </View>
         </View>

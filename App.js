@@ -3,6 +3,7 @@ import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import BottomTabNavigation from './src/navigation/BottomTabNavigation';
+import AuthTabNavigator from './src/navigation/AuthTabNavigator';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Onboarding, HotelSearch, Success, SelectedRoom, Search, Payments, Settings, SelectRoom, HotelList, HotelDetails, PlaceDetails, CountryDetails, Recommended, Failed } from './src/screens';
@@ -38,6 +39,7 @@ export default function App() {
         <Stack.Navigator>
           <Stack.Screen name='Onboarding' component={Onboarding} options={{ headerShown: false }} />
           <Stack.Screen name='Bottom' component={BottomTabNavigation} options={{ headerShown: false }} />
+          <Stack.Screen name='Auth' component={AuthTabNavigator} options={{ headerShown: false }} />
           <Stack.Screen name='Search' component={Search} options={{ headerShown: false }} />
           <Stack.Screen name='CountryDetails' component={CountryDetails} options={{ headerShown: false }} />
           <Stack.Screen name='Recommended' component={Recommended} options={{ headerShown: false }} />

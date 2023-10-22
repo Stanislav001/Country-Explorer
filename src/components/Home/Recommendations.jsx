@@ -1,6 +1,6 @@
 import reusable from '../Reusable/reusable';
 import { Feather } from '@expo/vector-icons';
-import { useGetCountries } from '../../hooks/useCountry';
+import { useGetPlaces } from '../../hooks/usePlace';
 import { useNavigation } from '@react-navigation/native';
 import { COLORS, SIZES, TEXT, } from '../../constants/theme';
 import { ReusableText, ReusableTitle } from '../../components/index';
@@ -8,9 +8,9 @@ import { View, TouchableOpacity, FlatList, ActivityIndicator } from 'react-nativ
 
 const Recommendations = () => {
   const navigation = useNavigation();
-  const { data: countries, isLoading: isLoadingCountries, error: countriesError, } = useGetCountries();
+  const { data: places, isLoading: isLoadingPlaces, error: placesError, } = useGetPlaces();
 
-  if (isLoadingCountries) {
+  if (isLoadingPlaces) {
     return <ActivityIndicator size={SIZES.xxLarge} color={COLORS.lightBlue} />
   }
 
@@ -30,7 +30,7 @@ const Recommendations = () => {
 
       <FlatList
         horizontal
-        data={countries}
+        data={places}
         keyExtractor={(item) => item._id}
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{ columnGap: SIZES.medium }}
