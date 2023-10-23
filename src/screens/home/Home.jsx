@@ -26,7 +26,7 @@ const Home = ({ navigation }) => {
                 </View>
 
                 <ReusableText
-                    text={'Places'}
+                    text={'Countries'}
                     size={TEXT.large}
                     family={'medium'}
                     color={COLORS.black} />

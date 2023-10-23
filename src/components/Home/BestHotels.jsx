@@ -1,7 +1,7 @@
 import reusable from '../Reusable/reusable';
 import { Feather } from '@expo/vector-icons';
 import HotelCard from '../Tiles/Hotels/HotelCard';
-import { useGetHotels } from '../../hooks/useHotel';
+import { useGetLimitHotels } from '../../hooks/useHotel';
 import ReusableText from '../Reusable/ReusableText';
 import { useNavigation } from '@react-navigation/native';
 import { COLORS, TEXT, SIZES } from '../../constants/theme';
@@ -9,7 +9,7 @@ import { View, TouchableOpacity, FlatList, ActivityIndicator } from 'react-nativ
 
 const BestHotels = () => {
     const navigation = useNavigation();
-    const { data: hotels, isLoading: isLoadingHotels, error: hotelsError, } = useGetHotels();
+    const { data: hotels, isLoading: isLoadingHotels, error: hotelsError, } = useGetLimitHotels();
 
     if (isLoadingHotels) {
         return <ActivityIndicator size={SIZES.xxLarge} color={COLORS.lightBlue} />

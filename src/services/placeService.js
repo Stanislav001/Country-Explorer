@@ -13,6 +13,18 @@ const placeService = {
             throw error;
         }
     },
+    getRandomHotels: async () => {
+        try {
+            const response = await request.get('/places?random=true');
+            if (response.status === 200) {
+                return response.data;
+            } else {
+                throw new Error('Something went wrong');
+            }
+        } catch (error) {
+            throw error;
+        }
+    },
     getPlace: async (id) => {
         try {
             const response = await request.get(`/places/${id}`);

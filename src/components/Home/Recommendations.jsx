@@ -1,6 +1,6 @@
 import reusable from '../Reusable/reusable';
 import { Feather } from '@expo/vector-icons';
-import { useGetPlaces } from '../../hooks/usePlace';
+import { useGetRandomPlaces } from '../../hooks/usePlace';
 import { useNavigation } from '@react-navigation/native';
 import { COLORS, SIZES, TEXT, } from '../../constants/theme';
 import { ReusableText, ReusableTitle } from '../../components/index';
@@ -8,7 +8,7 @@ import { View, TouchableOpacity, FlatList, ActivityIndicator } from 'react-nativ
 
 const Recommendations = () => {
   const navigation = useNavigation();
-  const { data: places, isLoading: isLoadingPlaces, error: placesError, } = useGetPlaces();
+  const { data: places, isLoading: isLoadingPlaces, error: placesError, } = useGetRandomPlaces();
 
   if (isLoadingPlaces) {
     return <ActivityIndicator size={SIZES.xxLarge} color={COLORS.lightBlue} />

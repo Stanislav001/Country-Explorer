@@ -6,9 +6,39 @@ import reusable from '../../components/Reusable/reusable';
 import { Rating } from 'react-native-stock-star-rating';
 import { HeightSpacer, Counter, NetworkImage, ReusableBtn, ReusableText, WidthSpacer, AssetImage } from '../../components';
 
+import { useStripe } from '@stripe/stripe-react-native';
+import { createPaymentIntent } from '../../services/paymentService';
+
 const SelectedRoom = ({ navigation }) => {
     const router = useRoute();
     const { item, location } = router.params;
+    const { initPaymentSheet, presentPaymentSheet } = useStripe();
+
+    const onCheckout = async () => {
+        const response = await createPaymentIntent({ amount: Math.floor(100 * 100), });
+
+        if (response.error) {
+            return;
+        }
+        const { error: paymentSheetError } = await initPaymentSheet({
+            merchantDisplayName: 'Example, Inc.',
+            paymentIntentClientSecret: response?.paymentIntent,
+            defaultBillingDetails: {
+                name: 'Jane Doe',
+            },
+        });
+        if (paymentSheetError) {
+            //  Alert.alert('Something went wrong', paymentSheetError.message);
+            return;
+        }
+
+        const { error: paymentError } = await presentPaymentSheet();
+
+        if (paymentError) {
+            // Alert.alert(`Error code: ${paymentError.code}`, paymentError.message);
+            return;
+        }
+    }
 
     return (
         <View>
@@ -121,7 +151,7 @@ const SelectedRoom = ({ navigation }) => {
                             width={SIZES.width - 50}
                             borderColor={COLORS.green}
                             backgroundColor={COLORS.green}
-                            onPress={() => navigation.navigate('Successful')}
+                            onPress={() => onCheckout()}
                         />
                     </View>
                 </View>

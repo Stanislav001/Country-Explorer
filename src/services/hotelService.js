@@ -13,6 +13,18 @@ const hotelService = {
             throw error;
         }
     },
+    getLimitHotels: async () => {
+        try {
+            const response = await request.get('/hotels?limit=true');
+            if (response.status === 200) {
+                return response.data;
+            } else {
+                throw new Error('Something went wrong');
+            }
+        } catch (error) {
+            throw error;
+        }
+    },
     getHotel: async (id) => {
         try {
             const response = await request.get(`/hotels/${id}`);
