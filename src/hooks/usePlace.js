@@ -12,3 +12,7 @@ export const useGetRandomPlaces = (config) => {
 export const useGetPlace = (id, config) => {
     return useQuery(["fetch-place", id], () => placeService.getPlace(id).then((res) => res.place), config);
 };
+
+export const useSearchPlaces = (searchKey, config) => {
+    return useQuery(['search-places', searchKey], () => placeService.searchPlaces(searchKey), config);
+};

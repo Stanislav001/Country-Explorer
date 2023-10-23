@@ -36,7 +36,22 @@ const placeService = {
         } catch (error) {
             throw error;
         }
-    }
+    },
+    searchPlaces: async (searchKey) => {
+        if (searchKey) {
+            try {
+                const response = await request.get(`/places/search/${searchKey}`);
+
+                if (response.status === 200) {
+                    return response.data?.results;
+                } else {
+                    throw new Error('Something went wrong');
+                }
+            } catch (error) {
+                throw error;
+            }
+        }
+    },
 }
 
 export default placeService;
