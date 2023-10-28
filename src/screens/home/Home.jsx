@@ -1,11 +1,13 @@
 import styles from './home.style';
 import { AntDesign } from '@expo/vector-icons';
-import { TEXT, COLORS } from '../../constants/theme';
-import reusable from '../../components/Reusable/reusable';
-import { View, TouchableOpacity, SafeAreaView } from 'react-native';
-import { HeightSpacer, BestHotels, ReusableText, Recommendations, Places } from '../../components';
-
+import Places from '../../components/Home/Places';
 import { useAuth } from '../../context/auth-context';
+import { TEXT, COLORS } from '../../constants/theme';
+import BestHotels from '../../components/Home/BestHotels';
+import reusable from '../../components/Reusable/reusable';
+import Recommendations from '../../components/Home/Recommendations';
+import { View, TouchableOpacity, SafeAreaView, Dimensions } from 'react-native';
+import { HeightSpacer, ReusableText } from '../../components';
 
 const Home = ({ navigation }) => {
     const { currentUser } = useAuth();
@@ -17,8 +19,8 @@ const Home = ({ navigation }) => {
                     <ReusableText
                         size={TEXT.large}
                         family={'regular'}
-                        color={COLORS.black} 
-                        text={`Hey ${currentUser?.username}`}/>
+                        color={COLORS.black}
+                        text={`Hey ${currentUser?.username}`} />
 
                     <TouchableOpacity style={styles.box} onPress={() => navigation.navigate('Search')}>
                         <AntDesign name='search1' size={26} />

@@ -1,12 +1,11 @@
-import { View, Image } from 'react-native';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { TopBooking, TopInfo, TopTrips } from '../screens';
-import { COLORS, SIZES } from '../constants/theme';
-import { HeightSpacer, NetworkImage, ReusableText } from '../components';
-import AppBar from '../components/Reusable/AppBar';
 import styles from './topTab.style';
+import { View, Image } from 'react-native';
 import { useAuth } from '../context/auth-context';
-
+import { COLORS, SIZES } from '../constants/theme';
+import AppBar from '../components/Reusable/AppBar';
+import { TopBooking, TopInfo, TopTrips } from '../screens';
+import { HeightSpacer, NetworkImage, ReusableText } from '../components';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -18,7 +17,7 @@ const TopTab = ({ navigation }) => {
             <View style={{ backgroundColor: COLORS.lightWhite }}>
                 <View>
                     <NetworkImage
-                        source={'https://d326fntlu7tb1e.cloudfront.net/uploads/005cd529-6605-4bb9-8d8f-9475bf308f67-vinci_06.jpg'}
+                        source={'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&q=80&w=1000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dHJhdmVsJTIwd2FsbHBhcGVyfGVufDB8fDB8fHww'}
                         width={'100%'}
                         height={300}
                         borderRadius={0}
@@ -69,7 +68,7 @@ const TopTab = ({ navigation }) => {
 
             <Tab.Navigator>
                 <Tab.Screen name='Bookings' component={TopBooking} />
-                <Tab.Screen name='Trips' component={TopTrips} />
+                <Tab.Screen name='Preserved' component={TopTrips} />
                 <Tab.Screen name='Info' component={TopInfo} />
             </Tab.Navigator>
         </View >

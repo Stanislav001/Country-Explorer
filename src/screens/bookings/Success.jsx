@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
-import { AssetImage, ReusableText, ReusableBtn, ReusableTitle, HeightSpacer } from '../../components'
 import { COLORS, SIZES, TEXT } from '../../constants/theme';
+import ReusableTitle from '../../components/Reusable/ReusableTitle';
+import { AssetImage, ReusableText, ReusableBtn, HeightSpacer } from '../../components'
 
 const Success = ({ navigation }) => {
     const hotel = {

@@ -10,7 +10,6 @@ import reusable from '../../components/Reusable/reusable';
 import { View, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { DescriptionText, HotelMap, HeightSpacer, NetworkImage, ReusableText, ReviewsList, ReusableBtn } from '../../components';
 
-
 const HotelDetails = ({ navigation }) => {
     const route = useRoute();
     const id = route.params;

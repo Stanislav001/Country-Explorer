@@ -1,9 +1,10 @@
 import reusable from '../Reusable/reusable';
 import { Feather } from '@expo/vector-icons';
-import { useGetRandomPlaces } from '../../hooks/usePlace';
+import { ReusableText } from '../../components/index';
 import { useNavigation } from '@react-navigation/native';
+import { useGetRandomPlaces } from '../../hooks/usePlace';
 import { COLORS, SIZES, TEXT, } from '../../constants/theme';
-import { ReusableText, ReusableTitle } from '../../components/index';
+import ReusableTitle from '../../components/Reusable/ReusableTitle';
 import { View, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native';
 
 const Recommendations = () => {

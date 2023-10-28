@@ -1,12 +1,11 @@
 import { Feather } from '@expo/vector-icons';
+import { useGetPlace } from '../../hooks/usePlace';
 import { useRoute } from '@react-navigation/native';
 import AppBar from '../../components/Reusable/AppBar';
 import reusable from '../../components/Reusable/reusable';
 import { COLORS, TEXT, SIZES } from '../../constants/theme';
 import { ScrollView, View, TouchableOpacity, StyleSheet, ActivityIndicator } from 'react-native';
 import { NetworkImage, PopularList, ReusableBtn, ReusableText, DescriptionText, HeightSpacer } from '../../components/index';
-
-import { useGetPlace } from '../../hooks/usePlace';
 
 const PlaceDetails = ({ navigation }) => {
     const route = useRoute();
@@ -68,8 +67,7 @@ const PlaceDetails = ({ navigation }) => {
                         borderColor={COLORS.green}
                         btnText={"Find Best Hotels"}
                         backgroundColor={COLORS.green}
-                        onPress={() => navigation.navigate('HotelDetails', id)}
-                    />
+                        onPress={() => navigation.navigate('HotelSearch', id)} />
 
                     <HeightSpacer height={15} />
                 </View>

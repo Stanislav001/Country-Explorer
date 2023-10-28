@@ -1,9 +1,9 @@
 import { StyleSheet, View } from 'react-native';
+import * as Localization from 'expo-localization';
 import { COLORS, SIZES } from '../../constants/theme';
 import AppBar from '../../components/Reusable/AppBar';
 import { HeightSpacer, ReusableText, SettingTile } from '../../components';
 
-// 42.48
 const Settings = ({ navigation }) => {
     return (
         <View style={{ backgroundColor: COLORS.lightWhite, flex: 1 }} >
@@ -29,11 +29,11 @@ const Settings = ({ navigation }) => {
 
                 <HeightSpacer height={3} />
 
-                <SettingTile title={'Country'} title1={'USA'} />
+                <SettingTile title={'Country'} title1={Localization.region} />
 
                 <HeightSpacer height={3} />
 
-                <SettingTile title={'Currency'} title1={'USD'} />
+                <SettingTile title={'Currency'} title1={Localization.currency} />
 
                 <HeightSpacer height={40} />
 

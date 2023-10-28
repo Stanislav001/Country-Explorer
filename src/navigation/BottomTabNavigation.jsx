@@ -53,7 +53,7 @@ const BottomTabNavigation = () => {
 
             <Tab.Screen
                 name='Chat'
-                component={AuthTabNavigator}
+                component={Chat}
                 options={{
                     tabBarStyle: tabBarStyle,
                     tabBarShowLabel: false,

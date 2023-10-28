@@ -1,7 +1,11 @@
 import reusable from './reusable';
 import { COLORS, TEXT } from '../../constants/theme';
-import { View, StyleSheet, TouchableOpacity } from 'react-native'
-import { NetworkImage, WidthSpacer, HeightSpacer, Rating, ReusableText } from '../../components/index';
+import Rating from '../../components/Reusable/Rating';
+import WidthSpacer from '../../components/Reusable/WidthSpacer';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import ReusableText from '../../components/Reusable/ReusableText';
+import NetworkImage from '../../components/Reusable/NetworkImage';
+import HeightSpacer from '../../components/Reusable/HeightSpacer';
 
 const ReusableTitle = ({ item, roomAddress, onPress }) => {
   return (

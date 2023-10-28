@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
-import { View, TextInput, FlatList, TouchableOpacity, Image, SafeAreaView } from 'react-native';
+import { useState } from 'react';
 import styles from './search.style';
 import { Feather } from '@expo/vector-icons';
 import { COLORS } from '../../constants/theme';
-import { HeightSpacer, HotelCard } from '../../components';
+import { HeightSpacer } from '../../components';
 import AppBar from '../../components/Reusable/AppBar';
+import HotelCard from '../../components/Tiles/Hotels/HotelCard';
+import { View, TextInput, FlatList, TouchableOpacity, Image, SafeAreaView } from 'react-native';
 
 const HotelSearch = ({ navigation }) => {
     const [searchKey, setSearchKey] = useState('');

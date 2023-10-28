@@ -1,7 +1,8 @@
 import { View, FlatList } from 'react-native';
-import { ReusableTitle, ReusableBtn } from '../../components';
+import { ReusableBtn } from '../../components';
 import { COLORS, SIZES } from '../../constants/theme';
 import reusable from '../../components/Reusable/reusable';
+import ReusableTitle from '../../components/Reusable/ReusableTitle';
 
 const TopBooking = () => {
 

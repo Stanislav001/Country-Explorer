@@ -1,5 +1,5 @@
 import { FlatList } from 'react-native';
-import { Slides } from '../../components';
+import Slides from '../../components/Onboard/Slides';
 
 const Onboarding = () => {
 
