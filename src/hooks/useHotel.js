@@ -1,5 +1,5 @@
-import { useQuery } from "react-query";
 import hotelService from "../services/hotelService";
+import { useQuery, useInfiniteQuery } from "react-query";
 
 export const useGetHotels = (config) => {
     return useQuery(["fetch-hotels"], () => hotelService.getHotels().then((res) => res.hotels), config);

@@ -48,7 +48,7 @@ const SelectRoom = ({ navigation }) => {
                                     width={SIZES.width - 50}
                                     borderColor={COLORS.green}
                                     backgroundColor={COLORS.green}
-                                    onPress={() => navigation.navigate('SelectedRoom', { item, location: data?.address })}
+                                    onPress={() => navigation.navigate('SelectedRoom', { item, location: data?.address, hotelId: data?._id })}
                                 />
                             </View>
                         </View>

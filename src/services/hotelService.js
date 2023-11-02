@@ -1,9 +1,15 @@
 import { request } from "../helpers/request";
 
 const hotelService = {
-    getHotels: async () => {
+    getHotels: async (page, perPage) => {
         try {
-            const response = await request.get('/hotels');
+            const response = await request.get('/hotels', {
+                params: {
+                    page: page,
+                    perPage: perPage,
+                },
+            });
+
             if (response.status === 200) {
                 return response.data;
             } else {

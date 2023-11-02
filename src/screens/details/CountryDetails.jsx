@@ -60,7 +60,7 @@ const CountryDetails = ({ navigation }) => {
 
                     <HeightSpacer height={10} />
 
-                    <PopularList data={country?.popular} />
+                    <PopularList data={country?.popular} type={'place'} />
 
                     <ReusableBtn
                         borderWidth={0}

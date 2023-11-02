@@ -112,9 +112,9 @@ const HotelDetails = ({ navigation }) => {
                     </TouchableOpacity>
                 </View>
 
-                <HeightSpacer height={10} />
+                <HeightSpacer height={15} />
 
-                <ReviewsList reviews={hotel?.reviews} />
+                {/* <ReviewsList reviews={hotel?.reviews} /> */}
             </View>
 
             <View style={[reusable.rowWithSpace('space-between'), styles.bottom]}>

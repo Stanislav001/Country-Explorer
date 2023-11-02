@@ -1,19 +1,13 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { useRoute } from '@react-navigation/native';
+import { StyleSheet, Text, View } from 'react-native';
 import { COLORS, SIZES, TEXT } from '../../constants/theme';
 import ReusableTitle from '../../components/Reusable/ReusableTitle';
-import { AssetImage, ReusableText, ReusableBtn, HeightSpacer } from '../../components'
+import { AssetImage, ReusableText, ReusableBtn, HeightSpacer } from '../../components';
 
 const Success = ({ navigation }) => {
-    const hotel = {
-        "_id": "64c674d23cfa5e847bcd5430",
-        "country_id": "64c62bfc65af9f8c969a8d04",
-        "title": "Seaside Resort",
-        "imageUrl": "https://d326fntlu7tb1e.cloudfront.net/uploads/f5cae706-9e63-4a7d-9fdd-f63f34b93f37-seaside.jpeg",
-        "rating": 4.9,
-        "review": "1204 Reviews",
-        "location": "Miami Beach, FL"
-    }
-
+    const router = useRoute();
+    const { item,location } = router.params;
+   
     return (
         <View>
             <View style={{ marginTop: '20%' }}>
@@ -48,7 +42,7 @@ const Success = ({ navigation }) => {
 
                     <HeightSpacer height={20} />
 
-                    <ReusableTitle item={hotel} />
+                    <ReusableTitle item={item} roomAddress={location} />
 
                     <HeightSpacer height={40} />
 

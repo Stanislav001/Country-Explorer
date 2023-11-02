@@ -1,18 +1,47 @@
-import { StyleSheet, Text, View } from 'react-native'
-import { useRoute } from '@react-navigation/native'
+import { useState } from 'react';
+import { FontAwesome } from '@expo/vector-icons';
+import { useRoute } from '@react-navigation/native';
+import { useAuth } from '../../context/auth-context';
 import AppBar from '../../components/Reusable/AppBar';
-import { COLORS, SIZES, TEXT } from '../../constants/theme';
-import reusable from '../../components/Reusable/reusable';
-import { Rating } from 'react-native-stock-star-rating';
-import { HeightSpacer, Counter, NetworkImage, ReusableBtn, ReusableText, WidthSpacer, AssetImage } from '../../components';
-
+import { COLORS, SIZES } from '../../constants/theme';
+import { bookHotel } from '../../services/userService';
 import { useStripe } from '@stripe/stripe-react-native';
+import { Rating } from 'react-native-stock-star-rating';
+import reusable from '../../components/Reusable/reusable';
 import { createPaymentIntent } from '../../services/paymentService';
+import { StyleSheet, View, Alert, TouchableOpacity } from 'react-native';
+import { HeightSpacer, Counter, NetworkImage, ReusableBtn, ReusableText, ReusableCalendar, WidthSpacer, AssetImage } from '../../components';
 
 const SelectedRoom = ({ navigation }) => {
     const router = useRoute();
-    const { item, location } = router.params;
+    const { currentToken } = useAuth();
+    const { item, location, hotelId } = router.params;
     const { initPaymentSheet, presentPaymentSheet } = useStripe();
+
+    const [endDate, setEndDate] = useState();
+    const [startDate, setStartDate] = useState();
+    const [errorMessage, setErrorMessage] = useState('');
+    const [showCalendar, setShowCalendar] = useState(false);
+
+    const onDateSelection = async (start, end) => {
+        setStartDate(new Date(start).toISOString().split('T')[0]);
+        setEndDate(new Date(end).toISOString().split('T')[0]);
+        setShowCalendar(false);
+    }
+
+    const bookHotelHandler = async () => {
+        setErrorMessage('');
+        try {
+            await onCheckout();
+            const result = await bookHotel(hotelId, item?._id, startDate, endDate, currentToken);
+
+            if (result?.status === 200) {
+                navigation.navigate('Successful', { item, location })
+            }
+        } catch (error) {
+            setErrorMessage(error.response?.data?.message)
+        }
+    }
 
     const onCheckout = async () => {
         const response = await createPaymentIntent({ amount: Math.floor(100 * 100), });
@@ -102,6 +131,21 @@ const SelectedRoom = ({ navigation }) => {
                                 family={'regular'}
                                 size={SIZES.medium}
                                 color={COLORS.black}
+                                text={'Select date range'} />
+
+                            <TouchableOpacity onPress={() => setShowCalendar(true)}>
+                                <FontAwesome name="calendar" size={20} color="black" />
+                            </TouchableOpacity>
+
+                        </View>
+
+                        <HeightSpacer height={10} />
+
+                        <View style={reusable.rowWithSpace('space-between')}>
+                            <ReusableText
+                                family={'regular'}
+                                size={SIZES.medium}
+                                color={COLORS.black}
                                 text={'Price per night'} />
 
                             <ReusableText
@@ -142,6 +186,8 @@ const SelectedRoom = ({ navigation }) => {
                             <Counter maxCount={item?.SleepsCount} />
                         </View>
 
+                        {errorMessage ? Alert.alert(`${errorMessage}`, 'Please select new dates and try again.') : null}
+
                         <HeightSpacer height={15} />
 
                         <ReusableBtn
@@ -151,11 +197,13 @@ const SelectedRoom = ({ navigation }) => {
                             width={SIZES.width - 50}
                             borderColor={COLORS.green}
                             backgroundColor={COLORS.green}
-                            onPress={() => onCheckout()}
+                            onPress={() => bookHotelHandler()}
                         />
                     </View>
                 </View>
             </View>
+
+            <ReusableCalendar visible={showCalendar} setVisible={setShowCalendar} onDateSelection={onDateSelection} />
         </View>
     )
 }

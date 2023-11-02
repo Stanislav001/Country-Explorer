@@ -1,10 +1,10 @@
-import { Text, View, TextInput, TouchableOpacity } from 'react-native'
-import styles from './signin.style'
-import { Formik } from 'formik'
 import * as Yup from 'yup';
+import { Formik } from 'formik'
 import { useState } from 'react';
+import styles from './signin.style';
 import { COLORS, SIZES } from '../../constants/theme';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Text, View, TextInput, TouchableOpacity } from 'react-native'
 import { HeightSpacer, ReusableBtn, WidthSpacer } from '../../components';
 
 import { useAuth } from '../../context/auth-context';
@@ -16,16 +16,24 @@ const validationSchema = Yup.object().shape({
     email: Yup.string().email('Provide a valid email').required('Required')
 });
 
-const Registration = () => {
+const Registration = ({ navigation }) => {
+    const [errorText, setErrorText] = useState('');
     const [obscureText, setObscureText] = useState(true);
     const { changeCurrentUser, setIsLoaded, isLoaded } = useAuth();
 
+    const clearAlertMessage = () => setErrorText('');
+
     const onSubmitHandler = async (values) => {
         setIsLoaded(true);
-        let result = await registerUser(values);
-        await changeCurrentUser(result?.data?.token);
-        navigation.navigate('Bottom');
-        setIsLoaded(false);
+        try {
+            let result = await registerUser(values);
+            await changeCurrentUser(result?.data?.token);
+            navigation.navigate('Bottom');
+        } catch (error) {
+            setErrorText(error?.response?.data?.message)
+        } finally {
+            setIsLoaded(false);
+        }
     }
 
     return (
@@ -51,7 +59,10 @@ const Registration = () => {
                                         autoCapitalize="none"
                                         styles={{ flex: 1, }}
                                         placeholder='Username'
-                                        onChangeText={handleChange('username')}
+                                        onChangeText={(text) => {
+                                            handleChange('username')(text);
+                                            clearAlertMessage();
+                                        }}
                                         onFocus={() => { setFieldTouched('username') }}
                                         onBlur={() => { setFieldTouched('username', "") }}
                                     />
@@ -76,7 +87,10 @@ const Registration = () => {
                                         autoCapitalize="none"
                                         styles={{ flex: 1, }}
                                         placeholder='Email'
-                                        onChangeText={handleChange('email')}
+                                        onChangeText={(text) => {
+                                            handleChange('email')(text);
+                                            clearAlertMessage();
+                                        }}
                                         onFocus={() => { setFieldTouched('email') }}
                                         onBlur={() => { setFieldTouched('email', "") }}
                                     />
@@ -102,7 +116,10 @@ const Registration = () => {
                                             value={values.password}
                                             placeholder='Password'
                                             secureTextEntry={obscureText}
-                                            onChangeText={handleChange('password')}
+                                            onChangeText={(text) => {
+                                                handleChange('password')(text);
+                                                clearAlertMessage();
+                                            }}
                                             onFocus={() => { setFieldTouched('password') }}
                                             onBlur={() => { setFieldTouched('password', "") }}
                                         />
@@ -117,6 +134,7 @@ const Registration = () => {
                                 )}
                             </View>
                         </View>
+                        {errorText ? <Text style={styles.errorMessage}>{errorText}</Text> : null}
 
                         <HeightSpacer height={20} />
 

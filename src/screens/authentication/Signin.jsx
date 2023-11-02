@@ -15,8 +15,11 @@ const validationSchema = Yup.object().shape({
 });
 
 const Signin = ({ navigation }) => {
+    const [errorText, setErrorText] = useState('');
     const [obscureText, setObscureText] = useState(true);
     const { changeCurrentUser, setIsLoaded } = useAuth();
+
+    const clearAlertMessage = () => setErrorText('');
 
     async function onSubmitHandler(values) {
         setIsLoaded(true);
@@ -30,9 +33,10 @@ const Signin = ({ navigation }) => {
                 navigation.navigate('Bottom');
             }
         } catch (error) {
-
+            setErrorText(error?.message)
+        } finally {
+            setIsLoaded(false);
         }
-        setIsLoaded(false);
     }
 
 
@@ -59,7 +63,10 @@ const Signin = ({ navigation }) => {
                                         autoCapitalize="none"
                                         styles={{ flex: 1, }}
                                         placeholder='Enter email'
-                                        onChangeText={handleChange('email')}
+                                        onChangeText={(text) => {
+                                            handleChange('email')(text);
+                                            clearAlertMessage();
+                                        }}
                                         onFocus={() => { setFieldTouched('email') }}
                                         onBlur={() => { setFieldTouched('email', "") }}
                                     />
@@ -85,7 +92,10 @@ const Signin = ({ navigation }) => {
                                             value={values.password}
                                             placeholder='Enter password'
                                             secureTextEntry={obscureText}
-                                            onChangeText={handleChange('password')}
+                                            onChangeText={(text) => {
+                                                handleChange('password')(text);
+                                                clearAlertMessage();
+                                            }}
                                             onFocus={() => { setFieldTouched('password') }}
                                             onBlur={() => { setFieldTouched('password', "") }}
                                         />
@@ -100,6 +110,8 @@ const Signin = ({ navigation }) => {
                                 )}
                             </View>
                         </View>
+
+                        {errorText ? <Text style={styles.errorMessage}>{errorText}</Text> : null}
 
                         <HeightSpacer height={20} />
 

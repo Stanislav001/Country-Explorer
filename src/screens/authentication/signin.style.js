@@ -22,13 +22,13 @@ const styles = StyleSheet.create({
     }),
     label: {
         fontFamily: 'regular',
-        fontSize: SIZES.small,
+        fontSize: SIZES.medium,
         marginBottom: 5,
         marginEnd: 5,
     },
     errorMessage: {
         color: COLORS.red,
-        fontSize: SIZES.small,
+        fontSize: SIZES.medium,
         fontFamily: 'regular',
         marginTop: 5,
         marginLeft: 5

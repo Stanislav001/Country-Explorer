@@ -28,8 +28,8 @@ const ReusableTitle = ({ item, roomAddress, onPress }) => {
             size={14}
             family={'medium'}
             color={COLORS.gray}
-            text={item?.location || (item?.address ? `${item?.address?.City}, ${item?.address?.Country}` : `${roomAddress?.City}, ${roomAddress?.Country}`)} />
-
+            text={(typeof item.location === 'string') ? item.location : (item?.address ? `${item?.address?.City}, ${item?.address?.Country}` : `${roomAddress?.City}, ${roomAddress?.Country}`)} />
+            
           <HeightSpacer height={8} />
 
           <View style={reusable.rowWithSpace('flex-start')}>

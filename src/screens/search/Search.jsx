@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styles from './search.style';
 import { Feather } from '@expo/vector-icons';
 import { COLORS } from '../../constants/theme';
-import { HeightSpace } from '../../components';
+import { HeightSpacer } from '../../components';
 import { useSearchPlaces } from '../../hooks/usePlace';
 import ReusableTitle from '../../components/Reusable/ReusableTitle';
 import { View, TextInput, FlatList, TouchableOpacity, Image, SafeAreaView } from 'react-native';
@@ -47,7 +47,6 @@ const Search = ({ navigation }) => {
                     )}
                 />
             )}
-
         </SafeAreaView>
     )
 }

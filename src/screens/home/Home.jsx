@@ -6,7 +6,7 @@ import { TEXT, COLORS } from '../../constants/theme';
 import BestHotels from '../../components/Home/BestHotels';
 import reusable from '../../components/Reusable/reusable';
 import Recommendations from '../../components/Home/Recommendations';
-import { View, TouchableOpacity, SafeAreaView, Dimensions } from 'react-native';
+import { View, TouchableOpacity, SafeAreaView, StatusBar } from 'react-native';
 import { HeightSpacer, ReusableText } from '../../components';
 
 const Home = ({ navigation }) => {
@@ -14,6 +14,7 @@ const Home = ({ navigation }) => {
 
     return (
         <SafeAreaView style={reusable.container}>
+        <StatusBar hidden={true} translucent={false} />
             <View>
                 <View style={reusable.rowWithSpace('space-between')}>
                     <ReusableText

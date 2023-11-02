@@ -58,7 +58,7 @@ const PlaceDetails = ({ navigation }) => {
 
                     <HeightSpacer height={10} />
 
-                    <PopularList data={place?.popular} />
+                    <PopularList data={place?.popular} type={'hotel'} location ={place?.location}/>
 
                     <ReusableBtn
                         borderWidth={0}
