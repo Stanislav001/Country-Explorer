@@ -58,9 +58,9 @@ const TopTab = ({ navigation }) => {
                         <View style={{ alignItems: 'center' }}>
                             <ReusableText
                                 family={'medium'}
-                                text={'email@gmail.com'}
                                 size={SIZES.medium}
-                                color={COLORS.white} />
+                                color={COLORS.white}
+                                text={currentUser?.email} />
                         </View>
                     </View>
                 </View>

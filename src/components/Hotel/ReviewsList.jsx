@@ -22,7 +22,7 @@ const ReviewsList = ({ reviews }) => {
                             family={'regular'}
                             size={SIZES.medium}
                             color={COLORS.black}
-                            text={" There are no reviews for this hotel"} />
+                            text={"There are no reviews for this hotel"} />
                     </View>
                 ) : null
             }

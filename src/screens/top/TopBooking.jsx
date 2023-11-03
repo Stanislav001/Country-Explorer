@@ -5,6 +5,7 @@ import reusable from '../../components/Reusable/reusable';
 import { useGetBookingData } from '../../hooks/useBooking';
 import { View, FlatList, ActivityIndicator } from 'react-native';
 import ReusableTitle from '../../components/Reusable/ReusableTitle';
+import { ReusableText } from '../../components';
 
 const TopBooking = ({ navigation }) => {
     const { currentToken } = useAuth();
@@ -42,6 +43,17 @@ const TopBooking = ({ navigation }) => {
                                 onPress={() => navigation.navigate('Bottom')} />
                         </View>
                     </View>
+                )}
+                ListFooterComponent={(
+                    (hotels?.length === 0 && !isLoadingHotels) ?
+                        <View style={{ marginBottom: 10 }}>
+                            <ReusableText
+                                family={'regular'}
+                                size={SIZES.medium}
+                                color={COLORS.black}
+                                text={"You don't have any reservations saved yet"} />
+                        </View>
+                        : null
                 )}
             />
         </View>

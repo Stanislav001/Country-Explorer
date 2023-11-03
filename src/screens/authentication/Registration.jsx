@@ -11,9 +11,10 @@ import { useAuth } from '../../context/auth-context';
 import { registerUser } from '../../services/authService';
 
 const validationSchema = Yup.object().shape({
+    email: Yup.string().email('Provide a valid email').required('Required'),
     username: Yup.string().min(3, 'Username must be at least 3 characters').required('Required'),
     password: Yup.string().min(8, 'Password must be at least 8 characters').required('Required'),
-    email: Yup.string().email('Provide a valid email').required('Required')
+    confirmPassword: Yup.string().required("Required").min(8, 'Password must be at least 8 characters').oneOf([Yup.ref("password"), null], "The passwords do not match"),
 });
 
 const Registration = ({ navigation }) => {
@@ -134,6 +135,41 @@ const Registration = ({ navigation }) => {
                                 )}
                             </View>
                         </View>
+
+                        <View style={styles.wrapper}>
+                            <Text style={styles.label}>Confirm Password</Text>
+                            <View>
+                                <View style={styles.inputWrapper(touched.password ? COLORS.lightBlue : COLORS.gray)}>
+                                    <MaterialCommunityIcons name="lock-outline" color={COLORS.gray} size={20} />
+
+                                    <WidthSpacer width={10} />
+
+                                    <View style={{ flex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row' }}>
+                                        <TextInput
+                                            autoCorrect={false}
+                                            autoCapitalize="none"
+                                            value={values.confirmPassword}
+                                            placeholder='Confirm password'
+                                            secureTextEntry={obscureText}
+                                            onChangeText={(text) => {
+                                                handleChange('confirmPassword')(text);
+                                                clearAlertMessage();
+                                            }}
+                                            onFocus={() => { setFieldTouched('confirmPassword') }}
+                                            onBlur={() => { setFieldTouched('confirmPassword', "") }}
+                                        />
+
+                                        <TouchableOpacity onPress={() => setObscureText(!obscureText)}>
+                                            <MaterialCommunityIcons size={18} name={obscureText ? "eye-outline" : "eye-off-outline"} />
+                                        </TouchableOpacity>
+                                    </View>
+                                </View>
+                                {touched.confirmPassword && errors.confirmPassword && (
+                                    <Text style={styles.errorMessage}>{errors.confirmPassword}</Text>
+                                )}
+                            </View>
+                        </View>
+
                         {errorText ? <Text style={styles.errorMessage}>{errorText}</Text> : null}
 
                         <HeightSpacer height={20} />
