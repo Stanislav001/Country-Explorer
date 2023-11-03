@@ -35,12 +35,12 @@ const TopBooking = ({ navigation }) => {
 
                             <ReusableBtn
                                 borderWidth={0}
-                                btnText={"Cancel"}
+                                btnText={"Add review"}
                                 borderColor={COLORS.red}
                                 textColor={COLORS.white}
                                 backgroundColor={COLORS.red}
                                 width={(SIZES.width - 50) / 2.2}
-                                onPress={() => navigation.navigate('Bottom')} />
+                                onPress={() => navigation.navigate('AddHotelReview', item?.hotel)} />
                         </View>
                     </View>
                 )}

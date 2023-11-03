@@ -107,14 +107,14 @@ const HotelDetails = ({ navigation }) => {
                         size={SIZES.large}
                         color={COLORS.gray} />
 
-                    <TouchableOpacity>
-                        <Feather name="list" size={20} />
-                    </TouchableOpacity>
+                    {hotel?.reviews?.length !== 0 ? <TouchableOpacity onPress={() => navigation.navigate('HotelReviews', hotel?._id)}>
+                        <Feather name='list' size={20} />
+                    </TouchableOpacity> : null}
                 </View>
 
                 <HeightSpacer height={15} />
 
-                {/* <ReviewsList reviews={hotel?.reviews} /> */}
+                <ReviewsList reviews={hotel?.reviews} />
             </View>
 
             <View style={[reusable.rowWithSpace('space-between'), styles.bottom]}>

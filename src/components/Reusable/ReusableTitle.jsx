@@ -18,6 +18,7 @@ const ReusableTitle = ({ item, roomAddress, onPress }) => {
         <View>
           <ReusableText
             text={item?.title}
+            isMaxWidth={true}
             family={'medium'}
             size={TEXT.medium}
             color={COLORS.black} />
@@ -26,6 +27,7 @@ const ReusableTitle = ({ item, roomAddress, onPress }) => {
 
           <ReusableText
             size={14}
+            isMaxWidth={true}
             family={'medium'}
             color={COLORS.gray}
             text={(typeof item.location === 'string') ? item.location : (item?.address ? `${item?.address?.City}, ${item?.address?.Country}` : `${roomAddress?.City}, ${roomAddress?.Country}`)} />

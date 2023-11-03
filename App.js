@@ -6,7 +6,7 @@ import BottomTabNavigation from './src/navigation/BottomTabNavigation';
 import AuthTabNavigator from './src/navigation/AuthTabNavigator';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Onboarding, HotelSearch, Success, SelectedRoom, Search, Payments, ProfileInfo, Settings, SelectRoom, HotelList, HotelDetails, PlaceDetails, CountryDetails, Recommended, Failed } from './src/screens';
+import { Onboarding, HotelSearch, Success, SelectedRoom, Search, HotelReviews, AddHotelReview, Payments, ProfileInfo, Settings, SelectRoom, HotelList, HotelDetails, PlaceDetails, CountryDetails, Recommended, Failed } from './src/screens';
 
 import { AuthProvider } from './src/context/auth-context';
 import { StripeProvider } from '@stripe/stripe-react-native';
@@ -60,6 +60,8 @@ export default function App() {
               <Stack.Screen name='SelectedRoom' component={SelectedRoom} options={{ headerShown: false }} />
               <Stack.Screen name='Successful' component={Success} options={{ headerShown: false }} />
               <Stack.Screen name='Fail' component={Failed} options={{ headerShown: false }} />
+              <Stack.Screen name='AddHotelReview' component={AddHotelReview} options={{ headerShown: false }} />
+              <Stack.Screen name='HotelReviews' component={HotelReviews} options={{ headerShown: false }} />
             </Stack.Navigator>
           </NavigationContainer>
         </StripeProvider>

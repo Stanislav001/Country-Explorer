@@ -5,7 +5,6 @@ import NetworkImage from '../../Reusable/NetworkImage';
 import WidthSpacer from '../../Reusable/WidthSpacer';
 import ReusableText from '../../Reusable/ReusableText';
 import { SIZES, COLORS } from '../../../constants/theme';
-import Rating from '../../Reusable/Rating';
 import DescriptionText from '../../Reusable/DescriptionText';
 
 const ReviewTitle = ({ review }) => {
@@ -21,7 +20,7 @@ const ReviewTitle = ({ review }) => {
 
                     <WidthSpacer width={20} />
 
-                    <View style={{ width: '70%' }}>
+                    <View style={{ width: '75%' }}>
                         <View style={reusable.rowWithSpace('space-between')}>
                             <ReusableText
                                 family={'medium'}
@@ -32,15 +31,12 @@ const ReviewTitle = ({ review }) => {
                             <WidthSpacer width={'20%'} />
 
                             <View style={reusable.rowWithSpace('space-between')}>
-                                <Rating rating={review.rating} />
-
-                                <WidthSpacer width={5} />
-
                                 <ReusableText
                                     family={'medium'}
                                     size={SIZES.small}
                                     color={COLORS.black}
-                                    text={review.updatedAt} />
+                                    text={new Date(review.updatedAt).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: '2-digit' }).replace(/\//g, '.')}
+                                />
                             </View>
                         </View>
 

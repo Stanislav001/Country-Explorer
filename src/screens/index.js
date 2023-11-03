@@ -22,6 +22,8 @@ import Signin from "./authentication/Signin";
 import Registration from "./authentication/Registration";
 import SelectedRoom from "./details/SelectedRoom";
 import ProfileInfo from "./profile/Profile";
+import AddHotelReview from './reviews/AddHotelReview';
+import HotelReviews from "./details/HotelReviews";
 
 export {
     Onboarding,
@@ -48,4 +50,6 @@ export {
     Registration,
     SelectedRoom,
     ProfileInfo,
+    AddHotelReview,
+    HotelReviews
 }

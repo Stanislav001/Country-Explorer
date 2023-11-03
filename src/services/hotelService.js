@@ -43,6 +43,18 @@ const hotelService = {
             throw error;
         }
     },
+    getHotelReviews: async (id) => {
+        try {
+            const response = await request.get(`/hotels/reviews/${id}`);
+            if (response.status === 200) {
+                return response.data;
+            } else {
+                throw new Error('Something went wrong');
+            }
+        } catch (error) {
+            throw error;
+        }
+    },
     getHotelRooms: async (id) => {
         try {
             const response = await request.get(`/hotels/rooms/${id}`);

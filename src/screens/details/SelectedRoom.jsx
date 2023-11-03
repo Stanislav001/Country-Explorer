@@ -32,7 +32,7 @@ const SelectedRoom = ({ navigation }) => {
     const bookHotelHandler = async () => {
         setErrorMessage('');
         try {
-            await onCheckout();
+           // await onCheckout();
             const result = await bookHotel(hotelId, item?._id, startDate, endDate, currentToken);
 
             if (result?.status === 200) {

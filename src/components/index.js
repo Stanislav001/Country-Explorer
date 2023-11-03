@@ -14,6 +14,7 @@ import SettingTile from "./Tiles/Settings/SettingTile";
 import AssetImage from "./Reusable/AssetImage";
 import Counter from "./Reusable/Counter";
 import ReusableCalendar from "./Reusable/Calendar";
+import InteractiveStarRating from "./Reusable/InteractiveStarRating";
 
 export {
     ReusableText,
@@ -32,4 +33,5 @@ export {
     AssetImage,
     Counter,
     ReusableCalendar,
+    InteractiveStarRating,
 }
