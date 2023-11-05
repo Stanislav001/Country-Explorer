@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import reusable from '../Reusable/reusable';
 import { Feather } from '@expo/vector-icons';
+import { WidthSpacer } from '../../components/index';
 import { ReusableText } from '../../components/index';
 import { useNavigation } from '@react-navigation/native';
 import { useGetRandomPlaces } from '../../hooks/usePlace';
@@ -9,6 +11,7 @@ import { View, TouchableOpacity, FlatList, ActivityIndicator } from 'react-nativ
 
 const Recommendations = () => {
   const navigation = useNavigation();
+  const [show, setShow] = useState(true);
   const { data: places, isLoading: isLoadingPlaces, error: placesError, } = useGetRandomPlaces();
 
   if (isLoadingPlaces) {
@@ -17,19 +20,25 @@ const Recommendations = () => {
 
   return (
     <View style={{ paddingTop: 30, }}>
-      <View style={[reusable.rowWithSpace('space-between'), { paddingBottom: 5 }]}>
-        <ReusableText
-          size={TEXT.large}
-          family={'medium'}
-          color={COLORS.black}
-          text={'Recommendations'} />
+      <View style={[reusable.rowWithSpace('space-between'), { paddingBottom: 5, }]}>
+        <View style={[reusable.rowWithSpace('flex-start')]}>
+          <ReusableText
+            size={TEXT.large}
+            family={'medium'}
+            color={COLORS.black}
+            text={'Recommendations'} />
 
-        <TouchableOpacity onPress={() => navigation.navigate('Recommended')}>
+          <TouchableOpacity onPress={() => setShow(!show)}>
+            <Feather name={show ? 'minus' : 'plus'} size={20} />
+          </TouchableOpacity>
+        </View>
+
+        {show ? <TouchableOpacity style={{ marginLeft: 3 }} onPress={() => navigation.navigate('Recommended')}>
           <Feather name='list' size={20} />
-        </TouchableOpacity>
+        </TouchableOpacity> : null}
       </View>
 
-      <FlatList
+      {show ? <FlatList
         horizontal
         data={places}
         keyExtractor={(item) => item._id}
@@ -39,9 +48,8 @@ const Recommendations = () => {
           <View style={{ marginRight: SIZES.medium }}>
             <ReusableTitle item={item} onPress={() => navigation.navigate('PlaceDetails', item._id)} />
           </View>
-
         )}
-      />
+      /> : null}
     </View>
   )
 }

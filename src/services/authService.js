@@ -42,3 +42,53 @@ export async function getUserData(token) {
         .catch(err => err.response.data);
     return result;
 }
+
+export async function sendEmail(email) {
+    try {
+        const response = await request.post('/send-email', {
+            email: email,
+        });
+
+        if (response.status === 200) {
+            return response.data;
+        } else {
+            throw new Error('Something went wrong');
+        }
+    } catch (error) {
+        throw error;
+    }
+}
+
+export async function checkToken(email, code) {
+    try {
+        const response = await request.post('/verify-code', {
+            email,
+            code
+        });
+
+        if (response.status === 200) {
+            return response.data;
+        } else {
+            throw new Error('Something went wrong');
+        }
+    } catch (error) {
+        throw error;
+    }
+}
+
+export async function changePassword(email, newPassword) {
+    try {
+        const response = await request.post('/change-password', {
+            email,
+            newPassword
+        });
+
+        if (response.status === 200) {
+            return response.data;
+        } else {
+            throw new Error('Something went wrong');
+        }
+    } catch (error) {
+        throw error;
+    }
+}

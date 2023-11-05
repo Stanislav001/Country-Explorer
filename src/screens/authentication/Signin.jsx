@@ -111,7 +111,16 @@ const Signin = ({ navigation }) => {
                             </View>
                         </View>
 
-                        {errorText ? <Text style={styles.errorMessage}>{errorText}</Text> : null}
+                        {errorText ? <>
+                            <HeightSpacer height={20} />
+                            <Text style={styles.errorMessage}>{errorText}</Text>
+                        </> : null}
+
+                        <View style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end' }}>
+                            <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
+                                <Text>Forgot password?</Text>
+                            </TouchableOpacity>
+                        </View>
 
                         <HeightSpacer height={20} />
 

@@ -24,6 +24,9 @@ import SelectedRoom from "./details/SelectedRoom";
 import ProfileInfo from "./profile/Profile";
 import AddHotelReview from './reviews/AddHotelReview';
 import HotelReviews from "./details/HotelReviews";
+import ForgotPassword from "./authentication/ForgotPassword";
+import CheckToken from "./authentication/CheckToken";
+import ChangePassword from "./authentication/ChangePassword";
 
 export {
     Onboarding,
@@ -51,5 +54,8 @@ export {
     SelectedRoom,
     ProfileInfo,
     AddHotelReview,
-    HotelReviews
+    HotelReviews,
+    ForgotPassword,
+    CheckToken,
+    ChangePassword
 }

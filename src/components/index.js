@@ -15,6 +15,7 @@ import AssetImage from "./Reusable/AssetImage";
 import Counter from "./Reusable/Counter";
 import ReusableCalendar from "./Reusable/Calendar";
 import InteractiveStarRating from "./Reusable/InteractiveStarRating";
+import OTPInput from "./Reusable/OTPInput";
 
 export {
     ReusableText,
@@ -34,4 +35,5 @@ export {
     Counter,
     ReusableCalendar,
     InteractiveStarRating,
+    OTPInput,
 }

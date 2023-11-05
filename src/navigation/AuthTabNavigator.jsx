@@ -17,7 +17,7 @@ const AuthTabNavigator = () => {
                 <View style={{ height: 600 }}>
 
                     <Tab.Navigator>
-                        <Tab.Screen name='Signin' component={Signin} options={{ headerShown: false }} />
+                        <Tab.Screen name='Sign in' component={Signin} options={{ headerShown: false }} />
                         <Tab.Screen name='Registration' component={Registration} options={{ headerShown: false }} />
                     </Tab.Navigator>
                 </View>

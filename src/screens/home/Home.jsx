@@ -5,16 +5,16 @@ import { useAuth } from '../../context/auth-context';
 import { TEXT, COLORS } from '../../constants/theme';
 import BestHotels from '../../components/Home/BestHotels';
 import reusable from '../../components/Reusable/reusable';
+import { HeightSpacer, ReusableText } from '../../components';
 import Recommendations from '../../components/Home/Recommendations';
 import { View, TouchableOpacity, SafeAreaView, StatusBar } from 'react-native';
-import { HeightSpacer, ReusableText } from '../../components';
 
 const Home = ({ navigation }) => {
     const { currentUser } = useAuth();
 
     return (
         <SafeAreaView style={reusable.container}>
-        <StatusBar hidden={true} translucent={false} />
+            <StatusBar hidden={true} translucent={false} />
             <View>
                 <View style={reusable.rowWithSpace('space-between')}>
                     <ReusableText
@@ -38,7 +38,7 @@ const Home = ({ navigation }) => {
 
                 <Recommendations />
 
-                <HeightSpacer height={15} />
+                <HeightSpacer height={10} />
 
                 <BestHotels />
             </View>
