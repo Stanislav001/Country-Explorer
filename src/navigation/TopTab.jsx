@@ -3,7 +3,7 @@ import { View, Image } from 'react-native';
 import { useAuth } from '../context/auth-context';
 import { COLORS, SIZES } from '../constants/theme';
 import AppBar from '../components/Reusable/AppBar';
-import { TopBooking, TopInfo, TopTrips } from '../screens';
+import { TopBooking, TopInfo, TopFavorites } from '../screens';
 import { HeightSpacer, NetworkImage, ReusableText } from '../components';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
@@ -68,7 +68,7 @@ const TopTab = ({ navigation }) => {
 
             <Tab.Navigator>
                 <Tab.Screen name='Bookings' component={TopBooking} />
-                <Tab.Screen name='Preserved' component={TopTrips} />
+                <Tab.Screen name='Favorites' component={TopFavorites} />
                 <Tab.Screen name='Info' component={TopInfo} />
             </Tab.Navigator>
         </View >

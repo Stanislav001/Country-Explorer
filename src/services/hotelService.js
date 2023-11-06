@@ -31,9 +31,16 @@ const hotelService = {
             throw error;
         }
     },
-    getHotel: async (id) => {
+    getHotel: async (id, token) => {
         try {
-            const response = await request.get(`/hotels/${id}`);
+            const config = {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            };
+
+            const response = await request.get(`/hotels/${id}`, config);
+
             if (response.status === 200) {
                 return response.data;
             } else {
@@ -58,6 +65,95 @@ const hotelService = {
     getHotelRooms: async (id) => {
         try {
             const response = await request.get(`/hotels/rooms/${id}`);
+            if (response.status === 200) {
+                return response.data;
+            } else {
+                throw new Error('Something went wrong');
+            }
+        } catch (error) {
+            throw error;
+        }
+    },
+    removeFromFavorites: async (hotelId, token) => {
+        try {
+            const response = await request.post('/favorite/removeFavorite', {
+                hotelId,
+            }, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (response.status === 200) {
+                return response.data;
+            } else {
+                throw new Error('Something went wrong');
+            }
+        } catch (error) {
+            throw error;
+        }
+    },
+    addToFavorite: async (hotelId, token) => {
+        try {
+            const response = await request.post('/favorite', {
+                hotelId,
+            }, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (response.status === 200) {
+                return response.data;
+            } else {
+                throw new Error('Something went wrong');
+            }
+        } catch (error) {
+            throw error;
+        }
+    },
+    checkFavoriteStatus: async (userId, hotelId) => {
+        try {
+            const response = await request.get(`/checkFavorite?userId=${userId}&hotelId=${hotelId}`);
+
+            if (response.status === 200) {
+                setIsFavorite(response.data.isFavorite);
+            } else {
+                throw new Error('Something went wrong');
+            }
+        } catch (error) {
+            throw error;
+        }
+    },
+    getHotels: async (page, perPage) => {
+        try {
+            const response = await request.get('/hotels', {
+                params: {
+                    page: page,
+                    perPage: perPage,
+                },
+            });
+
+            if (response.status === 200) {
+                return response.data;
+            } else {
+                throw new Error('Something went wrong');
+            }
+        } catch (error) {
+            throw error;
+        }
+    },
+    getFavoriteHotels: async (token) => {
+        const config = {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+        };
+
+
+        try {
+            const response = await request.get('/favorite', config);
+
             if (response.status === 200) {
                 return response.data;
             } else {

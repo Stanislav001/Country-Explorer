@@ -12,7 +12,7 @@ import HotelList from "./details/HotelList";
 import HotelSearch from "./search/HotelSearch";
 import SelectRoom from "./details/SelectRoom";
 import TopBooking from "./top/TopBooking";
-import TopTrips from "./top/TopTrips";
+import TopFavorites from "./top/TopFavorites";
 import TopInfo from "./top/TopInfo";
 import Payments from './profile/Payments';
 import Settings from './settings/Settings';
@@ -43,7 +43,7 @@ export {
     HotelSearch,
     SelectRoom,
     TopBooking,
-    TopTrips,
+    TopFavorites,
     TopInfo,
     Payments,
     Settings,

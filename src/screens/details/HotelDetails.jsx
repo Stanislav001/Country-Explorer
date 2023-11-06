@@ -1,22 +1,35 @@
 
 import styles from './hotelDetails.style';
-import { Feather } from '@expo/vector-icons';
 import { useGetHotel } from '../../hooks/useHotel';
 import { useRoute } from '@react-navigation/native';
 import AppBar from '../../components/Reusable/AppBar';
 import { COLORS, SIZES } from '../../constants/theme';
 import { Rating } from 'react-native-stock-star-rating';
+import { Feather, AntDesign } from '@expo/vector-icons';
 import reusable from '../../components/Reusable/reusable';
 import { View, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { DescriptionText, HotelMap, HeightSpacer, NetworkImage, ReusableText, ReviewsList, ReusableBtn } from '../../components';
+import { useAuth } from '../../context/auth-context';
+import hotelService from '../../services/hotelService';
 
 const HotelDetails = ({ navigation }) => {
     const route = useRoute();
     const id = route.params;
-    const { data: hotel, isLoading: isLoadingHotel, error: hotelError, } = useGetHotel(id);
+    const { currentToken } = useAuth();
+    const { data: hotel, isLoading: isLoadingHotel, error: hotelError, refetch } = useGetHotel(id, currentToken);
 
     if (isLoadingHotel) {
         return <ActivityIndicator size={SIZES.xxLarge} color={COLORS.lightBlue} />
+    }
+
+    const addToFavoritesHandler = async () => {
+        await hotelService.addToFavorite(hotel?._id, currentToken);
+        await refetch();
+    }
+
+    const removeFavoritesHandler = async () => {
+        await hotelService.removeFromFavorites(hotel?._id, currentToken);
+        await refetch();
     }
 
     const coordinates = {
@@ -53,11 +66,21 @@ const HotelDetails = ({ navigation }) => {
 
                 <View style={styles.titleContainer}>
                     <View style={styles.titleColumn}>
-                        <ReusableText
-                            family={'medium'}
-                            text={hotel.title}
-                            size={SIZES.xLarge}
-                            color={COLORS.black} />
+                        <View style={reusable.rowWithSpace('space-between')}>
+                            <ReusableText
+                                family={'medium'}
+                                text={hotel.title}
+                                size={SIZES.xLarge}
+                                color={COLORS.black} />
+
+                            {hotel?.isFavorite ?
+                                <TouchableOpacity onPress={() => removeFavoritesHandler()}>
+                                    <AntDesign name="heart" size={24} color="red" />
+                                </TouchableOpacity> :
+                                <TouchableOpacity onPress={async () => addToFavoritesHandler()}>
+                                    <AntDesign name="hearto" size={24} color="red" />
+                                </TouchableOpacity>}
+                        </View>
 
                         <HeightSpacer height={10} />
 
