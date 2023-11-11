@@ -1,4 +1,3 @@
-import { Feather } from '@expo/vector-icons';
 import { useGetPlace } from '../../hooks/usePlace';
 import { useRoute } from '@react-navigation/native';
 import AppBar from '../../components/Reusable/AppBar';
@@ -50,15 +49,11 @@ const PlaceDetails = ({ navigation }) => {
                             size={TEXT.medium}
                             color={COLORS.black}
                             text={'Popular Hotels'} />
-
-                        <TouchableOpacity onPress={() => { }}>
-                            <Feather name='list' size={20} />
-                        </TouchableOpacity>
                     </View>
 
                     <HeightSpacer height={10} />
 
-                    <PopularList data={place?.popular} type={'hotel'} location ={place?.location}/>
+                    <PopularList data={place?.popular} type={'hotel'} location={place?.location} />
 
                     <ReusableBtn
                         borderWidth={0}

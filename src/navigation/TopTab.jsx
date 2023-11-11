@@ -1,5 +1,6 @@
 import styles from './topTab.style';
 import { View, Image } from 'react-native';
+import { Feather } from '@expo/vector-icons';
 import { useAuth } from '../context/auth-context';
 import { COLORS, SIZES } from '../constants/theme';
 import AppBar from '../components/Reusable/AppBar';
@@ -34,12 +35,19 @@ const TopTab = ({ navigation }) => {
                         }}
                         color={COLORS.white}
                         color1={COLORS.white}
+                        isProfile={true}
                     />
 
                     <View style={styles.profile}>
-                        <Image
-                            style={styles.image}
-                            source={{ uri: currentUser?.profile }} />
+                        <View style={styles.avatarContainer}>
+                            <Image
+                                style={styles.image}
+                                source={{ uri: currentUser?.profile }}
+                            />
+                            <View style={styles.editIconContainer}>
+                                <Feather name="edit" size={24} color="black" />
+                            </View>
+                        </View>
 
                         <HeightSpacer height={5} />
 

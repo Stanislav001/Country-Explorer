@@ -52,10 +52,6 @@ const CountryDetails = ({ navigation }) => {
                             size={TEXT.large}
                             color={COLORS.black}
                             text={'Popular Destinations'} />
-
-                        <TouchableOpacity onPress={() => { }}>
-                            <Feather name='list' size={20} />
-                        </TouchableOpacity>
                     </View>
 
                     <HeightSpacer height={10} />

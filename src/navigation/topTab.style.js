@@ -21,7 +21,15 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.lightGrey,
         padding: 5,
         borderRadius: 12,
-    }
+    },
+    avatarContainer: {
+        position: 'relative',
+    },
+    editIconContainer: {
+        position: 'absolute',
+        top: 0,
+        right: 0,
+    },
 });
 
 export default styles;

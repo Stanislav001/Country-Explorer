@@ -4,13 +4,13 @@ import { AntDesign } from '@expo/vector-icons';
 import { COLORS, TEXT } from '../../constants/theme';
 import { StyleSheet, View, TouchableOpacity } from 'react-native'
 
-const AppBar = ({ color, title, color1, icon, onPress, onPress1, top, left, right }) => {
+const AppBar = ({ color, title, color1, icon, onPress, onPress1, top, left, right, isProfile }) => {
     return (
         <View style={styles.overlay(top, left, right)}>
             <View style={reusable.rowWithSpace('space-between')}>
-                <TouchableOpacity style={styles.box(color)} onPress={onPress}>
+                {isProfile ? null : <TouchableOpacity style={styles.box(color)} onPress={onPress}>
                     <AntDesign name='left' size={26} />
-                </TouchableOpacity>
+                </TouchableOpacity>}
 
                 <ReusableText
                     text={title}

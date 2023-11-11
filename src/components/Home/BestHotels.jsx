@@ -1,8 +1,8 @@
 import reusable from '../Reusable/reusable';
 import { Feather } from '@expo/vector-icons';
 import HotelCard from '../Tiles/Hotels/HotelCard';
-import { useGetLimitHotels } from '../../hooks/useHotel';
 import ReusableText from '../Reusable/ReusableText';
+import { useGetLimitHotels } from '../../hooks/useHotel';
 import { useNavigation } from '@react-navigation/native';
 import { COLORS, TEXT, SIZES } from '../../constants/theme';
 import { View, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native';
@@ -22,7 +22,7 @@ const BestHotels = () => {
                     size={TEXT.large}
                     family={'medium'}
                     color={COLORS.black}
-                    text={'Nearby Hotels'} />
+                    text={'Popular Hotels'} />
 
                 <TouchableOpacity onPress={() => navigation.navigate('HotelList')}>
                     <Feather name='list' size={20} />

@@ -32,7 +32,7 @@ const SelectedRoom = ({ navigation }) => {
     const bookHotelHandler = async () => {
         setErrorMessage('');
         try {
-           // await onCheckout();
+            // await onCheckout();
             const result = await bookHotel(hotelId, item?._id, startDate, endDate, currentToken);
 
             if (result?.status === 200) {
@@ -56,6 +56,7 @@ const SelectedRoom = ({ navigation }) => {
                 name: 'Jane Doe',
             },
         });
+
         if (paymentSheetError) {
             //  Alert.alert('Something went wrong', paymentSheetError.message);
             return;
@@ -66,6 +67,8 @@ const SelectedRoom = ({ navigation }) => {
         if (paymentError) {
             // Alert.alert(`Error code: ${paymentError.code}`, paymentError.message);
             return;
+        } else {
+            bookHotelHandler();
         }
     }
 
@@ -197,7 +200,7 @@ const SelectedRoom = ({ navigation }) => {
                             width={SIZES.width - 50}
                             borderColor={COLORS.green}
                             backgroundColor={COLORS.green}
-                            onPress={() => bookHotelHandler()}
+                            onPress={() => onCheckout()}
                         />
                     </View>
                 </View>

@@ -1,7 +1,7 @@
 import reusable from './reusable';
+import { View } from 'react-native';
 import WidthSpacer from './WidthSpacer';
 import ReusableText from './ReusableText';
-import { View, StyleSheet } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const Rating = ({ rating }) => {
@@ -20,7 +20,3 @@ const Rating = ({ rating }) => {
 }
 
 export default Rating;
-
-const styles = StyleSheet.create({
-
-});
