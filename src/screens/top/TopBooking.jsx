@@ -1,15 +1,23 @@
+import { useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import { ReusableBtn } from '../../components';
+import { ReusableText } from '../../components';
 import { useAuth } from '../../context/auth-context';
 import { COLORS, SIZES } from '../../constants/theme';
 import reusable from '../../components/Reusable/reusable';
 import { useGetBookingData } from '../../hooks/useBooking';
 import { View, FlatList, ActivityIndicator } from 'react-native';
 import ReusableTitle from '../../components/Reusable/ReusableTitle';
-import { ReusableText } from '../../components';
 
 const TopBooking = ({ navigation }) => {
     const { currentToken } = useAuth();
-    const { data: hotels, isLoading: isLoadingHotels, error: hotelsError, } = useGetBookingData(currentToken);
+    const { data: hotels, isLoading: isLoadingHotels, error: hotelsError, refetch } = useGetBookingData(currentToken);
+
+    useFocusEffect(
+        useCallback(() => {
+            refetch();
+        }, [refetch])
+    );
 
     if (isLoadingHotels) {
         return <ActivityIndicator size={SIZES.xxLarge} color={COLORS.lightBlue} />

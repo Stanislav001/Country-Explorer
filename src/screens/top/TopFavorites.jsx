@@ -1,9 +1,11 @@
+import { useCallback } from 'react';
 import { ReusableBtn } from '../../components';
 import { ReusableText } from '../../components';
 import { useAuth } from '../../context/auth-context';
 import { COLORS, SIZES } from '../../constants/theme';
 import hotelService from '../../services/hotelService';
 import reusable from '../../components/Reusable/reusable';
+import { useFocusEffect } from '@react-navigation/native';
 import { useGetFavoriteHotels } from '../../hooks/useHotel';
 import { View, FlatList, ActivityIndicator } from 'react-native';
 import ReusableTitle from '../../components/Reusable/ReusableTitle';
@@ -11,6 +13,12 @@ import ReusableTitle from '../../components/Reusable/ReusableTitle';
 const TopFavorites = ({ navigation }) => {
   const { currentToken } = useAuth();
   const { data: hotels, isLoading: isLoadingHotels, error: hotelsError, refetch } = useGetFavoriteHotels(currentToken);
+
+  useFocusEffect(
+    useCallback(() => {
+      refetch();
+    }, [refetch])
+  );
 
   if (isLoadingHotels) {
     return <ActivityIndicator size={SIZES.xxLarge} color={COLORS.lightBlue} />

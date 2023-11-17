@@ -32,5 +32,5 @@ export const useGetReviews = (id, config) => {
 };
 
 export const useGetFavoriteHotels = (token, config) => {
-    return useQuery(["fetch-favorite-hotels"], () => hotelService.getFavoriteHotels(token).then((res) => res), { cacheTime: 0 });
+    return useQuery(["fetch-favorite-hotels"], () => hotelService.getFavoriteHotels(token).then((res) => res));
 };
