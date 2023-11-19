@@ -16,24 +16,28 @@ import Counter from "./Reusable/Counter";
 import ReusableCalendar from "./Reusable/Calendar";
 import InteractiveStarRating from "./Reusable/InteractiveStarRating";
 import OTPInput from "./Reusable/OTPInput";
+import MonthlyExpensesChart from "./Profile/MonthlyExpensesChart";
+import MonthlyExpensesOptions from "./Profile/MonthlyExpensesOptions";
 
 export {
-    ReusableText,
-    ReusableBtn,
-    HeightSpacer,
-    WidthSpacer,
-    NetworkImage,
-    Rating,
-    DescriptionText,
-    PopularList,
-    HotelMap,
-    ReviewTitle,
-    ReviewsList,
-    ProfileTile,
-    SettingTile,
-    AssetImage,
-    Counter,
-    ReusableCalendar,
-    InteractiveStarRating,
-    OTPInput,
-}
+  ReusableText,
+  ReusableBtn,
+  HeightSpacer,
+  WidthSpacer,
+  NetworkImage,
+  Rating,
+  DescriptionText,
+  PopularList,
+  HotelMap,
+  ReviewTitle,
+  ReviewsList,
+  ProfileTile,
+  SettingTile,
+  AssetImage,
+  Counter,
+  ReusableCalendar,
+  InteractiveStarRating,
+  OTPInput,
+  MonthlyExpensesChart,
+  MonthlyExpensesOptions,
+};

@@ -1,8 +1,7 @@
 import { StyleSheet } from 'react-native';
-import MapView, { Marker } from 'react-native-maps'
+import MapView, { Marker } from 'react-native-maps';
 
 const Location = () => {
-
     const coordinates = {
         latitude: 43.71667,
         longitude: 26.83333,
@@ -10,19 +9,19 @@ const Location = () => {
         longitudeDelta: 0.01,
         title: 'My location',
         id: 'My location',
-    }
+    };
 
     return (
-        <MapView initialRegion={coordinates} styles={styles.map}>
-            <Marker coordinates={coordinates} title={coordinates.title} />
+        <MapView initialRegion={coordinates} style={styles.map}>
+            <Marker coordinate={coordinates} title={coordinates.title} />
         </MapView>
-    )
-}
+    );
+};
 
 export default Location;
 
 const styles = StyleSheet.create({
     map: {
-        ...StyleSheet.absoluteFillObject
-    }
+        ...StyleSheet.absoluteFillObject,
+    },
 });

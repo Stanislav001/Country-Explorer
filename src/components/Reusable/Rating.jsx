@@ -12,7 +12,7 @@ const Rating = ({ rating }) => {
 
             <ReusableText
                 size={15}
-                text={rating}
+                text={rating?.toFixed(1)}
                 color={'#FD9942'}
                 family={'medium'} />
         </View>

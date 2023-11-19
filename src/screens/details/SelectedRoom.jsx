@@ -33,7 +33,7 @@ const SelectedRoom = ({ navigation }) => {
         setErrorMessage('');
         try {
             // await onCheckout();
-            const result = await bookHotel(hotelId, item?._id, startDate, endDate, currentToken);
+            const result = await bookHotel(hotelId, item?._id, startDate, endDate, currentToken,);
 
             if (result?.status === 200) {
                 navigation.navigate('Successful', { item, location })
@@ -45,6 +45,10 @@ const SelectedRoom = ({ navigation }) => {
 
     const onCheckout = async () => {
         const response = await createPaymentIntent({ amount: Math.floor(100 * 100), });
+
+        if (!startDate || !endDate) {
+            return setErrorMessage('Please select start and end date.')
+        }
 
         if (response.error) {
             return;

@@ -6,6 +6,7 @@ import WidthSpacer from '../../Reusable/WidthSpacer';
 import ReusableText from '../../Reusable/ReusableText';
 import { SIZES, COLORS } from '../../../constants/theme';
 import DescriptionText from '../../Reusable/DescriptionText';
+import Rating from '../../Reusable/Rating';
 
 const ReviewTitle = ({ review }) => {
     return (
@@ -28,7 +29,6 @@ const ReviewTitle = ({ review }) => {
                                 color={COLORS.black}
                                 text={review.user.username} />
 
-                            <WidthSpacer width={'20%'} />
 
                             <View style={reusable.rowWithSpace('space-between')}>
                                 <ReusableText
@@ -37,6 +37,8 @@ const ReviewTitle = ({ review }) => {
                                     color={COLORS.black}
                                     text={new Date(review.updatedAt).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: '2-digit' }).replace(/\//g, '.')}
                                 />
+                                <WidthSpacer width={'5%'} />
+                                <Rating rating={review.rating} />
                             </View>
                         </View>
 
