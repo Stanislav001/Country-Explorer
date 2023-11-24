@@ -19,7 +19,7 @@ const ProfileInfo = ({ navigation }) => {
     const data = expensesData?.data?.map((monthData) => Math.round(monthData.totalSpending));
 
     return (
-        <View style={{ borderWidth: 1, borderColor: 'red', flex: 1 }}>
+        <View style={{ flex: 1 }}>
             <View style={{ height: 100 }}>
                 <AppBar
                     top={50}
