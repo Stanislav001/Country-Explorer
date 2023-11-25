@@ -1,13 +1,19 @@
-import { StyleSheet, TouchableOpacity, View } from 'react-native'
-import MapView, { Marker } from 'react-native-maps'
+import { useEffect } from 'react';
+import MapView, { Marker } from 'react-native-maps';
+import { useNavigation } from '@react-navigation/native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 
 const HotelMap = ({ coordinates }) => {
+    const navigation = useNavigation();
+
+
     return (
-        <TouchableOpacity onPress={() => { }}>
+        <TouchableOpacity onPress={() => navigation.navigate('Bottom', { screen: 'Location', params: { coordinates } })}>
             <MapView style={styles.maps} region={coordinates}>
-                <Marker coordinate={coordinates} title={coordinates.title} />
+                <Marker coordinate={coordinates} title={coordinates?.title} />
             </MapView>
-        </TouchableOpacity>
+        </TouchableOpacity >
+
     )
 }
 

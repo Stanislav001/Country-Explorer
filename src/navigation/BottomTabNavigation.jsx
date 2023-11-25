@@ -47,7 +47,6 @@ const BottomTabNavigation = ({ route }) => {
                     tabBarStyle: getFocusedRouteNameFromRoute(route) === 'Location' ? { display: 'none' } : tabBarStyle,
                     tabBarShowLabel: false,
                     headerShown: false,
-
                     tabBarIcon: ({ focused }) => (
                         <Ionicons name={focused ? 'location' : 'location-outline'} color={focused ? COLORS.red : COLORS.gray} size={26} />
                     )

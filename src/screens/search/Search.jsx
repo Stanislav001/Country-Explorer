@@ -3,6 +3,8 @@ import styles from './search.style';
 import { Feather } from '@expo/vector-icons';
 import { COLORS } from '../../constants/theme';
 import { HeightSpacer } from '../../components';
+import AppBar from '../../components/Reusable/AppBar';
+import { useSearchHotels } from '../../hooks/useHotel';
 import { useSearchPlaces } from '../../hooks/usePlace';
 import ReusableTitle from '../../components/Reusable/ReusableTitle';
 import { View, TextInput, FlatList, TouchableOpacity, Image, SafeAreaView } from 'react-native';
@@ -13,13 +15,23 @@ const Search = ({ navigation }) => {
 
     return (
         <SafeAreaView>
+            <View style={{ height: 50 }}>
+                <AppBar
+                    top={20}
+                    left={20}
+                    right={20}
+                    title={'Look for places'}
+                    color={COLORS.white}
+                    onPress={() => navigation.goBack()}
+                />
+            </View>
             <View style={styles.searchContainer}>
                 <View style={styles.searchWrapper}>
                     <TextInput
                         value={searchKey}
                         style={styles.input}
                         onChangeText={setSearchKey}
-                        placeholder='Where do you want to visit' />
+                        placeholder='Where do you want to go' />
                 </View>
 
                 <TouchableOpacity style={styles.searchBtn}>
@@ -38,6 +50,7 @@ const Search = ({ navigation }) => {
                 </View>
             ) : (
                 <FlatList
+                    style={{ marginBottom: 100 }}
                     data={searchResult}
                     keyExtractor={(item) => item._id}
                     renderItem={({ item }) => (

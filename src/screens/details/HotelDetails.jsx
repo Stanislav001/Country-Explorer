@@ -121,7 +121,11 @@ const HotelDetails = ({ navigation }) => {
                     text={`${hotel.address?.StreetAddress}, ${hotel.address?.City}, ${hotel.address?.Country}`}
                     size={SIZES.small + 2} />
 
-                <HotelMap coordinates={coordinates} />
+                <TouchableOpacity onPress={() => {
+                    navigation.navigate('Bottom', { screen: 'Location', params: { id: '' }, })
+                }}>
+                    <HotelMap coordinates={coordinates} />
+                </TouchableOpacity>
 
                 <View style={reusable.rowWithSpace('space-between')}>
                     <ReusableText
@@ -167,7 +171,7 @@ const HotelDetails = ({ navigation }) => {
                     onPress={() => navigation.navigate('SelectRoom', hotel._id)}
                 />
             </View>
-        </ScrollView>
+        </ScrollView >
     )
 }
 

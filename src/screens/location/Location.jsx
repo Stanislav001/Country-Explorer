@@ -1,25 +1,40 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { COLORS } from '../../constants/theme';
 import { FontAwesome5 } from '@expo/vector-icons';
 import MapView, { Marker } from 'react-native-maps';
 import { useGetHotels } from '../../hooks/useHotel';
+import { useRoute } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 import HotelMapCard from '../../components/Tiles/Hotels/HotelMapCard';
 import { StyleSheet, View, TouchableOpacity, Modal, StatusBar } from 'react-native';
 
 const Location = () => {
+    const route = useRoute();
+    const navigation = useNavigation();
+    const coordinates = route.params?.coordinates;
+
+    const [modalVisible, setModalVisible] = useState(false);
+    const [selectedHotel, setSelectedHotel] = useState(null);
     const { data: hotels, isLoading: isLoadingHotels } = useGetHotels();
-    const [region, setRegion] = useState({
+
+    const defaultRegion = {
         latitude: 43.71667,
         longitude: 26.83333,
         latitudeDelta: 0.01,
         longitudeDelta: 0.01,
-    });
+    };
 
-    const [selectedHotel, setSelectedHotel] = useState(null);
-    const [modalVisible, setModalVisible] = useState(false);
+    const [region, setRegion] = useState(
+        coordinates
+            ? coordinates
+            : defaultRegion
+    );
 
-    const navigation = useNavigation();
+    useEffect(() => {
+        if (coordinates) {
+            setRegion(coordinates);
+        }
+    }, [coordinates]);
 
     const handleZoomIn = () => {
         setRegion({
