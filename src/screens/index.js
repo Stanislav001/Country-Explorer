@@ -27,6 +27,7 @@ import HotelReviews from "./details/HotelReviews";
 import ForgotPassword from "./authentication/ForgotPassword";
 import CheckToken from "./authentication/CheckToken";
 import ChangePassword from "./authentication/ChangePassword";
+import Filter from "./filter/Filter";
 
 export {
   Onboarding,
@@ -58,4 +59,5 @@ export {
   ForgotPassword,
   CheckToken,
   ChangePassword,
+  Filter,
 };

@@ -14,10 +14,11 @@ import { HeightSpacer, Counter, NetworkImage, ReusableBtn, ReusableText, Reusabl
 
 const SelectedRoom = ({ navigation }) => {
     const router = useRoute();
-    const { currentToken } = useAuth();
+    const { currentToken, currentUser } = useAuth();
     const { item, location, hotelId } = router.params;
     const { initPaymentSheet, presentPaymentSheet } = useStripe();
 
+    const [count, setCount] = useState(1);
     const [endDate, setEndDate] = useState();
     const [startDate, setStartDate] = useState();
     const [errorMessage, setErrorMessage] = useState('');
@@ -32,7 +33,6 @@ const SelectedRoom = ({ navigation }) => {
     const bookHotelHandler = async () => {
         setErrorMessage('');
         try {
-            // await onCheckout();
             const result = await bookHotel(hotelId, item?._id, startDate, endDate, currentToken,);
 
             if (result?.status === 200) {
@@ -44,7 +44,7 @@ const SelectedRoom = ({ navigation }) => {
     }
 
     const onCheckout = async () => {
-        const response = await createPaymentIntent({ amount: Math.floor(100 * 100), });
+        const response = await createPaymentIntent({ amount: Math.floor((item?.price * count) * 100), });
 
         if (!startDate || !endDate) {
             return setErrorMessage('Please select start and end date.')
@@ -57,7 +57,7 @@ const SelectedRoom = ({ navigation }) => {
             merchantDisplayName: 'Example, Inc.',
             paymentIntentClientSecret: response?.paymentIntent,
             defaultBillingDetails: {
-                name: 'Jane Doe',
+                name: currentUser?.username,
             },
         });
 
@@ -190,7 +190,7 @@ const SelectedRoom = ({ navigation }) => {
                                 family={'regular'}
                                 size={SIZES.medium}
                                 color={COLORS.black} />
-                            <Counter maxCount={item?.SleepsCount} />
+                            <Counter maxCount={item?.SleepsCount} count={count} setCount={setCount} />
                         </View>
 
                         {errorMessage ? Alert.alert(`${errorMessage}`, 'Please select new dates and try again.') : null}

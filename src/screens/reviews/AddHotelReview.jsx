@@ -6,7 +6,7 @@ import { useRoute } from '@react-navigation/native';
 import { useAuth } from '../../context/auth-context';
 import AppBar from '../../components/Reusable/AppBar';
 import { COLORS, SIZES } from '../../constants/theme';
-import { View, TextInput, Text } from 'react-native';
+import { View, TextInput, Text, Platform } from 'react-native';
 import reviewService from '../../services/reviewService';
 import reusable from '../../components/Reusable/reusable';
 import { RatingInput } from 'react-native-stock-star-rating';
@@ -48,7 +48,7 @@ const AddHotelReview = ({ navigation }) => {
         <View style={{ backgroundColor: COLORS.lightWhite, flex: 1 }} >
             <View style={{ height: 80 }}>
                 <AppBar
-                    top={40}
+                    top={50}
                     left={10}
                     right={0}
                     title={'Review'}
@@ -90,7 +90,8 @@ const AddHotelReview = ({ navigation }) => {
                                     <View style={styles.inputWrapper(touched.content ? COLORS.lightBlue : COLORS.gray)}>
                                         <TextInput
                                             multiline={true}
-                                            numberOfLines={6}
+                                            numberOfLines={Platform.OS === 'ios' ? null : 6}
+                                            minHeight={(Platform.OS === 'ios') ? (20 * 6) : null}
                                             autoCorrect={false}
                                             autoCapitalize="none"
                                             value={values.content}

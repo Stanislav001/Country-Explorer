@@ -48,7 +48,7 @@ const PlaceDetails = ({ navigation }) => {
                             family={'medium'}
                             size={TEXT.medium}
                             color={COLORS.black}
-                            text={'Popular Hotels'} />
+                            text={'Recommended Hotels'} />
                     </View>
 
                     <HeightSpacer height={10} />

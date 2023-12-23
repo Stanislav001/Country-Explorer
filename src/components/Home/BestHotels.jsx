@@ -22,7 +22,7 @@ const BestHotels = () => {
                     size={TEXT.large}
                     family={'medium'}
                     color={COLORS.black}
-                    text={'Popular Hotels'} />
+                    text={'Recommended Hotels'} />
 
                 <TouchableOpacity onPress={() => navigation.navigate('HotelList')}>
                     <Feather name='list' size={20} />

@@ -31,7 +31,7 @@ const SettingTile = ({ title, title1, onPress }) => {
 
                     <WidthSpacer width={5} />
 
-                    <AntDesign name='right' size={20} color={COLORS.dark} />
+                    {/* <AntDesign name='right' size={20} color={COLORS.dark} /> */}
                 </View>
             ) : (
                 <View>
@@ -44,7 +44,7 @@ const SettingTile = ({ title, title1, onPress }) => {
 
                         <WidthSpacer width={5} />
 
-                        <AntDesign name='right' size={20} color={COLORS.dark} />
+                        {/* <AntDesign name='right' size={20} color={COLORS.dark} /> */}
                     </View>
                 </View>
             )}

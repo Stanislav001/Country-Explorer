@@ -2,7 +2,7 @@
 import TopTab from './TopTab';
 import { COLORS } from '../constants/theme';
 import { Ionicons } from '@expo/vector-icons'
-import { Home, Chat, Location } from '../screens';
+import { Home, Chat, Location, Filter } from '../screens';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { getFocusedRouteNameFromRoute, useNavigation } from '@react-navigation/native';
 
@@ -54,7 +54,7 @@ const BottomTabNavigation = ({ route }) => {
 
             <Tab.Screen
                 name='Chat'
-                component={Chat}
+                component={Filter}
                 options={{
                     tabBarStyle: tabBarStyle,
                     tabBarShowLabel: false,
