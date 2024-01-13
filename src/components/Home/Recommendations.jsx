@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import reusable from '../Reusable/reusable';
 import { Feather } from '@expo/vector-icons';
-import { WidthSpacer } from '../../components/index';
+import { HeightSpacer } from '../../components/index';
 import { ReusableText } from '../../components/index';
 import { useNavigation } from '@react-navigation/native';
 import { useGetRandomPlaces } from '../../hooks/usePlace';
@@ -37,6 +37,8 @@ const Recommendations = () => {
           <Feather name='list' size={20} />
         </TouchableOpacity> : null}
       </View>
+
+      <HeightSpacer height={5} />
 
       {show ? <FlatList
         horizontal

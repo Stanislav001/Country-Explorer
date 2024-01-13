@@ -36,9 +36,11 @@ const Home = ({ navigation }) => {
 
                 <Places />
 
+                <HeightSpacer height={5} />
+
                 <Recommendations />
 
-                <HeightSpacer height={10} />
+                <HeightSpacer height={15} />
 
                 <BestHotels />
             </View>

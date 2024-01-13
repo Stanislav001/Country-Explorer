@@ -2,6 +2,7 @@ import reusable from '../Reusable/reusable';
 import { Feather } from '@expo/vector-icons';
 import HotelCard from '../Tiles/Hotels/HotelCard';
 import ReusableText from '../Reusable/ReusableText';
+import HeightSpacer from '../Reusable/HeightSpacer';
 import { useGetLimitHotels } from '../../hooks/useHotel';
 import { useNavigation } from '@react-navigation/native';
 import { COLORS, TEXT, SIZES } from '../../constants/theme';
@@ -28,6 +29,8 @@ const BestHotels = () => {
                     <Feather name='list' size={20} />
                 </TouchableOpacity>
             </View>
+
+            <HeightSpacer height={10} />
 
             <FlatList
                 horizontal

@@ -1,11 +1,24 @@
+import { useCallback, useState } from 'react';
 import { useGetHotels } from '../../hooks/useHotel';
 import AppBar from '../../components/Reusable/AppBar';
 import { COLORS, SIZES } from '../../constants/theme';
 import ReusableTitle from '../../components/Reusable/ReusableTitle';
-import { View, FlatList, SafeAreaView, ActivityIndicator } from 'react-native';
+import { View, FlatList, SafeAreaView, ActivityIndicator, RefreshControl } from 'react-native';
+
+const wait = (timeout) => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+}
 
 const HotelList = ({ navigation }) => {
-    const { data: hotels, isLoading: isLoadingHotels, error: hotelsError, } = useGetHotels();
+    const { data: hotels, isLoading: isLoadingHotels, error: hotelsError, refetch } = useGetHotels();
+
+    const [refreshing, setRefreshing] = useState(false)
+
+    let onRefresh = useCallback(async () => {
+        setRefreshing(true)
+        await refetch();
+        wait(400).then(() => setRefreshing(false));
+    }, []);
 
     if (isLoadingHotels) {
         return <ActivityIndicator size={SIZES.xxLarge} color={COLORS.lightBlue} />
@@ -38,6 +51,12 @@ const HotelList = ({ navigation }) => {
                             <ReusableTitle item={item} onPress={() => navigation.navigate('HotelDetails', item?._id)} />
                         </View>
                     )}
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={refreshing}
+                            onRefresh={onRefresh}
+                        />
+                    }
                 />
             </View>
         </SafeAreaView>
