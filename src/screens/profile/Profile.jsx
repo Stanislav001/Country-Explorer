@@ -15,6 +15,7 @@ const ProfileInfo = ({ navigation }) => {
         return <ActivityIndicator size={SIZES.xxLarge} color={COLORS.lightBlue} />;
     }
 
+
     const labels = expensesData?.data?.map((monthData) => `${monthData.month}`);
     const data = expensesData?.data?.map((monthData) => Math.round(monthData.totalSpending));
 

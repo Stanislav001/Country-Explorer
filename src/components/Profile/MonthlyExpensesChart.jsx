@@ -20,7 +20,6 @@ const MonthlyExpensesChart = ({ labels, data, totalSpending, averageSpending }) 
                     height={220}
                     withInnerLines={false}
                     yAxisInterval={1}
-                    // yAxisSuffix="$"
                     chartConfig={{
                         backgroundColor: 'transparent',
                         backgroundGradientFrom: 'transparent',

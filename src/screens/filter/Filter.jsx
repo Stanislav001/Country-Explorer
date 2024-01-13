@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import styles from './filter.styles';
 import AppBar from '../../components/Reusable/AppBar';
-import { useSearchHotels } from '../../hooks/useHotel';
-import { useSearchPlaces } from '../../hooks/usePlace';
 import reusable from '../../components/Reusable/reusable';
-import { COLORS, TEXT, SIZES } from '../../constants/theme';
+import { COLORS, SIZES } from '../../constants/theme';
 import { View, Text, SafeAreaView, TouchableOpacity } from 'react-native';
 import { DescriptionText, ReusableBtn, ReusableText } from '../../components';
 import { AntDesign, FontAwesome, MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
+import CustomSlider from '../../components/Reusable/CustomSlider';
+import hotelService from '../../services/hotelService';
 
-const rectanglesData = [1, 2, 3, 4, 5];
+const ratingData = [1, 2, 3, 4, 5];
 const amenitiesData = [
     { text: '24h Front-Desk', icon: <AntDesign name="infocirlceo" size={18} color="black" /> },
     { text: 'Free Parking', icon: <MaterialCommunityIcons name="parking" size={18} color="black" /> },
@@ -18,16 +18,22 @@ const amenitiesData = [
 ];
 
 const Filter = ({ navigation }) => {
-    const [searchKey, setSearchKey] = useState('');
+    const [toValue, setToValue] = useState(300);
+    const [fromValue, setFromValue] = useState(20);
     const [selectedAmenities, setSelectedAmenities] = useState('');
     const [selectedStarOption, setSelectedStarOption] = useState('');
-    const { data: searchResult, isLoading, isError, error } = useSearchPlaces(searchKey);
+
+    const applyFilterHandler = async () => {
+        const resultData = await hotelService.filterHotel(fromValue, toValue, selectedStarOption);
+
+        navigation.navigate('HotelSearch', { resultData })
+    }
 
     return (
         <SafeAreaView>
             <View style={{ height: 50 }}>
                 <AppBar
-                    top={20}
+                    top={10}
                     left={20}
                     right={20}
                     title={'Hotel Filter'}
@@ -46,7 +52,9 @@ const Filter = ({ navigation }) => {
                         color={COLORS.gray}
                         text={'Price Range'} />
 
-                    <View style={{ borderBottomColor: COLORS.lightGrey, marginVertical: 15, borderBottomWidth: 1 }} />
+                    <CustomSlider toValue={toValue} setToValue={setToValue} fromValue={fromValue} setFromValue={setFromValue} />
+
+                    <View style={{ borderBottomColor: COLORS.lightGrey, marginTop: 80, marginBottom: 15, borderBottomWidth: 1 }} />
 
                     <ReusableText
                         family={'regular'}
@@ -55,8 +63,8 @@ const Filter = ({ navigation }) => {
                         text={'Star Rating'} />
 
                     <View style={reusable.rowWithSpace('center')}>
-                        {rectanglesData.map((data, index) => (
-                            <TouchableOpacity key={index} style={styles.rectangle(data === selectedStarOption)} onPress={() => setSelectedStarOption(data)}>
+                        {ratingData.map((data, index) => (
+                            <TouchableOpacity key={index} style={styles.rectangle(data === selectedStarOption)} onPress={() => setSelectedStarOption((prevOption) => (prevOption === data ? '' : data))}>
                                 <ReusableText
                                     text={data}
                                     family={'regular'}
@@ -76,7 +84,7 @@ const Filter = ({ navigation }) => {
 
                     <View style={reusable.rowWithSpace('center')}>
                         {amenitiesData?.map((data, index) => (
-                            <TouchableOpacity key={index} style={{ alignItems: 'center' }} onPress={() => setSelectedAmenities(data?.text)}>
+                            <TouchableOpacity key={index} style={{ alignItems: 'center' }} onPress={() => setSelectedAmenities((prevOption) => (prevOption === data?.text ? '' : data?.text))}>
                                 <View style={styles.circle(selectedAmenities === data?.text)}>
                                     {data?.icon}
                                 </View>
@@ -86,17 +94,17 @@ const Filter = ({ navigation }) => {
                     </View>
 
                     <View style={{ borderBottomColor: COLORS.lightGrey, marginVertical: 15, borderBottomWidth: 1 }} />
-
-                    <ReusableBtn
-                        borderWidth={0}
-                        textColor={COLORS.white}
-                        width={SIZES.width - 40}
-                        borderColor={COLORS.green}
-                        btnText={"Apply"}
-                        backgroundColor={COLORS.green}
-                        onPress={() => { }}
-                    />
                 </View>
+
+                <ReusableBtn
+                    borderWidth={0}
+                    textColor={COLORS.white}
+                    width={SIZES.width - 40}
+                    borderColor={COLORS.green}
+                    btnText={"Apply"}
+                    backgroundColor={COLORS.green}
+                    onPress={() => applyFilterHandler()}
+                />
             </View>
         </SafeAreaView>
     )

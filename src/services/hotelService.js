@@ -187,6 +187,28 @@ const hotelService = {
       }
     }
   },
+  filterHotel: async (fromPrice, toPrice, startRating) => {
+    try {
+      let url = "/hotels/filter";
+      if (fromPrice && toPrice) {
+        url += `/${fromPrice}/${toPrice}`;
+      }
+
+      if (startRating !== undefined) {
+        url += `/${startRating}`;
+      }
+
+      const response = await request.get(url);
+
+      if (response.status === 200) {
+        return response.data;
+      } else {
+        throw new Error("Something went wrong");
+      }
+    } catch (error) {
+      throw error;
+    }
+  },
 };
 
 export default hotelService;

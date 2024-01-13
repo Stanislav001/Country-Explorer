@@ -27,6 +27,7 @@ import {
   CountryDetails,
   Recommended,
   Failed,
+  Filter,
 } from "./src/screens";
 
 import { AuthProvider } from "./src/context/auth-context";
@@ -181,6 +182,11 @@ export default function App() {
               <Stack.Screen
                 name="ChangePassword"
                 component={ChangePassword}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="Filter"
+                component={Filter}
                 options={{ headerShown: false }}
               />
             </Stack.Navigator>

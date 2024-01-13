@@ -80,7 +80,7 @@ const SelectedRoom = ({ navigation }) => {
         <View>
             <View style={{ height: 100 }}>
                 <AppBar
-                    top={30}
+                    top={50}
                     left={20}
                     right={20}
                     title={item.title}
