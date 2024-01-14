@@ -1,24 +1,13 @@
-import { useCallback, useState } from 'react';
 import { useGetPlaces } from '../../hooks/usePlace';
 import AppBar from '../../components/Reusable/AppBar';
 import { COLORS, SIZES } from '../../constants/theme';
+import useRefreshControl from '../../hooks/useRefreshControl';
 import ReusableTitle from '../../components/Reusable/ReusableTitle';
 import { View, FlatList, SafeAreaView, ActivityIndicator, RefreshControl } from 'react-native';
 
-const wait = (timeout) => {
-  return new Promise(resolve => setTimeout(resolve, timeout));
-}
-
 const Recommended = ({ navigation }) => {
   const { data: places, isLoading: isLoadingPlaces, error: placesError, refetch } = useGetPlaces();
-
-  const [refreshing, setRefreshing] = useState(false)
-
-  let onRefresh = useCallback(async () => {
-    setRefreshing(true)
-    await refetch();
-    wait(400).then(() => setRefreshing(false));
-  }, []);
+  const { refreshing, onRefresh } = useRefreshControl(refetch);
 
   if (isLoadingPlaces) {
     return <ActivityIndicator size={SIZES.xxLarge} color={COLORS.lightBlue} />
@@ -40,7 +29,7 @@ const Recommended = ({ navigation }) => {
         />
       </View>
 
-      <View style={{ paddingTop: 20 }}>
+      <View style={{ paddingTop: 20, marginBottom: 100 }}>
         <FlatList
           data={places}
           keyExtractor={(item) => item._id}

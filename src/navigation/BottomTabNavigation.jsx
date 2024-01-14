@@ -16,6 +16,7 @@ const tabBarStyle = {
     borderRadius: 20,
     position: 'absolute',
     alignItems: 'center',
+    paddingBottom: 0
 }
 
 const BottomTabNavigation = ({ route }) => {

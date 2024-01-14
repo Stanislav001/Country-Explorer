@@ -1,17 +1,19 @@
 import { useCallback } from 'react';
-import { useFocusEffect } from '@react-navigation/native';
 import { ReusableBtn } from '../../components';
 import { ReusableText } from '../../components';
 import { useAuth } from '../../context/auth-context';
 import { COLORS, SIZES } from '../../constants/theme';
 import reusable from '../../components/Reusable/reusable';
+import { useFocusEffect } from '@react-navigation/native';
 import { useGetBookingData } from '../../hooks/useBooking';
-import { View, FlatList, ActivityIndicator } from 'react-native';
+import useRefreshControl from '../../hooks/useRefreshControl';
 import ReusableTitle from '../../components/Reusable/ReusableTitle';
+import { View, FlatList, ActivityIndicator, RefreshControl } from 'react-native';
 
 const TopBooking = ({ navigation }) => {
     const { currentToken } = useAuth();
     const { data: hotels, isLoading: isLoadingHotels, error: hotelsError, refetch } = useGetBookingData(currentToken);
+    const { refreshing, onRefresh } = useRefreshControl(refetch);
 
     useFocusEffect(
         useCallback(() => {
@@ -52,6 +54,12 @@ const TopBooking = ({ navigation }) => {
                         </View>
                     </View>
                 )}
+                refreshControl={
+                    <RefreshControl
+                        refreshing={refreshing}
+                        onRefresh={onRefresh}
+                    />
+                }
                 ListFooterComponent={(
                     (hotels?.length === 0 && !isLoadingHotels) ?
                         <View style={{ marginBottom: 10 }}>

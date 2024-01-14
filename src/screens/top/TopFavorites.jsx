@@ -7,12 +7,14 @@ import hotelService from '../../services/hotelService';
 import reusable from '../../components/Reusable/reusable';
 import { useFocusEffect } from '@react-navigation/native';
 import { useGetFavoriteHotels } from '../../hooks/useHotel';
-import { View, FlatList, ActivityIndicator } from 'react-native';
+import useRefreshControl from '../../hooks/useRefreshControl';
 import ReusableTitle from '../../components/Reusable/ReusableTitle';
+import { View, FlatList, ActivityIndicator, RefreshControl } from 'react-native';
 
 const TopFavorites = ({ navigation }) => {
   const { currentToken } = useAuth();
   const { data: hotels, isLoading: isLoadingHotels, error: hotelsError, refetch } = useGetFavoriteHotels(currentToken);
+  const { refreshing, onRefresh } = useRefreshControl(refetch);
 
   useFocusEffect(
     useCallback(() => {
@@ -58,6 +60,12 @@ const TopFavorites = ({ navigation }) => {
             </View>
           </View>
         )}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+          />
+        }
         ListFooterComponent={(
           (hotels?.length === 0 && !isLoadingHotels) ?
             <View style={{ marginBottom: 10 }}>

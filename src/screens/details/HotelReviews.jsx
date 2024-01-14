@@ -1,27 +1,16 @@
-import { useCallback, useState } from 'react';
 import { useRoute } from '@react-navigation/native';
 import { useGetReviews } from '../../hooks/useHotel';
 import AppBar from '../../components/Reusable/AppBar';
 import { COLORS, SIZES } from '../../constants/theme';
+import useRefreshControl from '../../hooks/useRefreshControl';
 import { ReviewsList, HeightSpacer, ReviewTitle } from '../../components';
 import { View, SafeAreaView, ActivityIndicator, ScrollView, RefreshControl, FlatList } from 'react-native';
-
-const wait = (timeout) => {
-    return new Promise(resolve => setTimeout(resolve, timeout));
-}
 
 const HotelReviews = ({ navigation }) => {
     const route = useRoute();
     const id = route.params;
     const { data: reviews, isLoading: isLoadingHotels, error: hotelsError, refetch } = useGetReviews(id);
-
-    const [refreshing, setRefreshing] = useState(false)
-
-    let onRefresh = useCallback(async () => {
-        setRefreshing(true)
-        await refetch();
-        wait(400).then(() => setRefreshing(false));
-    }, []);
+    const { refreshing, onRefresh } = useRefreshControl(refetch);
 
     if (isLoadingHotels) {
         return <ActivityIndicator size={SIZES.xxLarge} color={COLORS.lightBlue} />
