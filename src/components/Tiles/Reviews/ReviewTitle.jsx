@@ -9,6 +9,7 @@ import DescriptionText from '../../Reusable/DescriptionText';
 import Rating from '../../Reusable/Rating';
 
 const ReviewTitle = ({ review }) => {
+
     return (
         <View style={styles.reviewBorder}>
             <View style={reusable.rowWithSpace('space-between')}>
@@ -17,7 +18,7 @@ const ReviewTitle = ({ review }) => {
                         width={54}
                         height={54}
                         borderRadius={10}
-                        source={review.user.profile} />
+                        source={review.user?.profile || 'https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg'} />
 
                     <WidthSpacer width={20} />
 
@@ -27,7 +28,7 @@ const ReviewTitle = ({ review }) => {
                                 family={'medium'}
                                 size={SIZES.small}
                                 color={COLORS.black}
-                                text={review.user.username} />
+                                text={review?.user?.username || 'Anonymous'} />
 
 
                             <View style={reusable.rowWithSpace('space-between')}>
@@ -35,14 +36,14 @@ const ReviewTitle = ({ review }) => {
                                     family={'medium'}
                                     size={SIZES.small}
                                     color={COLORS.black}
-                                    text={new Date(review.updatedAt).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: '2-digit' }).replace(/\//g, '.')}
+                                    text={new Date(review?.updatedAt).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: '2-digit' }).replace(/\//g, '.')}
                                 />
                                 <WidthSpacer width={'5%'} />
-                                <Rating rating={review.rating} />
+                                <Rating rating={review?.rating} />
                             </View>
                         </View>
 
-                        <DescriptionText text={review.review} lines={3} />
+                        <DescriptionText text={review?.review} lines={3} />
                     </View>
                 </View>
             </View>
