@@ -58,29 +58,32 @@ const HotelDetails = ({ navigation }) => {
             </View>
 
             <View style={styles.container}>
-                <NetworkImage
-                    height={320}
-                    width={'100%'}
-                    borderRadius={25}
-                    source={hotel.imageUrl} />
+                <View style={styles.imageContainer}>
+                    <NetworkImage
+                        height={320}
+                        width={'100%'}
+                        borderRadius={25}
+                        source={hotel.imageUrl}
+                    />
+
+                    <TouchableOpacity
+                        style={styles.favoriteIcon}
+                        onPress={hotel?.isFavorite ? removeFavoritesHandler : addToFavoritesHandler}
+                    >
+                        {hotel?.isFavorite ? <AntDesign name="heart" size={24} color="red" /> :
+                            <AntDesign name="hearto" size={24} color="red" />
+                        }
+                    </TouchableOpacity>
+                </View>
 
                 <View style={styles.titleContainer}>
                     <View style={styles.titleColumn}>
-                        <View style={reusable.rowWithSpace('space-between')}>
-                            <ReusableText
-                                family={'medium'}
-                                text={hotel.title}
-                                size={SIZES.xLarge}
-                                color={COLORS.black} />
 
-                            {hotel?.isFavorite ?
-                                <TouchableOpacity onPress={() => removeFavoritesHandler()}>
-                                    <AntDesign name="heart" size={24} color="red" />
-                                </TouchableOpacity> :
-                                <TouchableOpacity onPress={async () => addToFavoritesHandler()}>
-                                    <AntDesign name="hearto" size={24} color="red" />
-                                </TouchableOpacity>}
-                        </View>
+                        <ReusableText
+                            family={'medium'}
+                            text={hotel.title}
+                            size={SIZES.large}
+                            color={COLORS.black} />
 
                         <HeightSpacer height={10} />
 
@@ -113,7 +116,7 @@ const HotelDetails = ({ navigation }) => {
                     color={COLORS.gray}
                     text={'Description'} />
 
-                <DescriptionText text={hotel.Description} />
+                <DescriptionText text={hotel.Description || "Coming soon"} />
 
                 <ReusableText
                     family={'medium'}

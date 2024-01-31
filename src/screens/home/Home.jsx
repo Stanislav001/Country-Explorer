@@ -14,7 +14,7 @@ const Home = ({ navigation }) => {
 
     return (
         <SafeAreaView style={reusable.container}>
-            <StatusBar hidden={true} translucent={false} />
+            <StatusBar hidden={false} translucent={false} />
             <View>
                 <View style={reusable.rowWithSpace('space-between')}>
                     <ReusableText

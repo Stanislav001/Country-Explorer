@@ -48,7 +48,7 @@ const Recommendations = () => {
         contentContainerStyle={{ columnGap: SIZES.medium }}
         renderItem={({ item }) => (
           <View style={{ marginRight: SIZES.medium }}>
-            <ReusableTitle item={item} onPress={() => navigation.navigate('PlaceDetails', item._id)} />
+            <ReusableTitle item={item} cardTitle={true} onPress={() => navigation.navigate('PlaceDetails', item._id)} />
           </View>
         )}
       /> : null}

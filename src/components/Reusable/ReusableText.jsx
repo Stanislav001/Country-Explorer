@@ -1,8 +1,8 @@
 import { Text, StyleSheet } from 'react-native';
 
-const ReusableText = ({ text, family, size, color, align, isMaxWidth }) => {
+const ReusableText = ({ text, family, size, color, align, isMaxWidth, onOneRow }) => {
     return (
-        <Text style={styles.textStyle(family, size, color, align, isMaxWidth)}>{text}</Text>
+        <Text numberOfLines={onOneRow ? 1 : null} style={styles.textStyle(family, size, color, align, isMaxWidth)}>{text}</Text>
     )
 }
 
@@ -14,6 +14,6 @@ const styles = StyleSheet.create({
         fontSize: size,
         color: color,
         textAlign: align,
-        maxWidth: isMaxWidth ? 200 : '100%'
+        maxWidth: isMaxWidth ? 200 : '100%',
     })
 })

@@ -7,7 +7,7 @@ import ReusableText from '../../components/Reusable/ReusableText';
 import NetworkImage from '../../components/Reusable/NetworkImage';
 import HeightSpacer from '../../components/Reusable/HeightSpacer';
 
-const ReusableTitle = ({ item, roomAddress, onPress }) => {
+const ReusableTitle = ({ item, roomAddress, onPress, cardTitle }) => {
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <View style={reusable.rowWithSpace('flex-start')}>
@@ -20,6 +20,7 @@ const ReusableTitle = ({ item, roomAddress, onPress }) => {
             text={item?.title}
             isMaxWidth={true}
             family={'medium'}
+            onOneRow={true}
             size={TEXT.medium}
             color={COLORS.black} />
 
@@ -28,10 +29,11 @@ const ReusableTitle = ({ item, roomAddress, onPress }) => {
           <ReusableText
             size={14}
             isMaxWidth={true}
+            onOneRow={true}
             family={'medium'}
             color={COLORS.gray}
             text={(typeof item.location === 'string') ? item.location : (item?.address ? `${item?.address?.City}, ${item?.address?.Country}` : `${roomAddress?.City}, ${roomAddress?.Country}`)} />
-            
+
           <HeightSpacer height={8} />
 
           <View style={reusable.rowWithSpace('flex-start')}>

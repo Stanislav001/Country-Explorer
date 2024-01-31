@@ -60,7 +60,7 @@ const Location = () => {
 
     return (
         <View style={styles.container}>
-            <StatusBar hidden={true} translucent={false} />
+            <StatusBar hidden={false} translucent={false} />
             <MapView region={region} style={styles.map}>
                 <Marker coordinate={region} title="My location" />
                 {hotels && hotels.map((hotel, index) => {
