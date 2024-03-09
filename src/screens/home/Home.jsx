@@ -12,9 +12,6 @@ import { HeightSpacer, ReusableText } from '../../components';
 import Recommendations from '../../components/Home/Recommendations';
 import CustomSpinner from '../../components/Reusable/CustomSpinner';
 import { View, TouchableOpacity, SafeAreaView, StatusBar } from 'react-native';
-
-import { useEffect } from 'react';
-
 const Home = ({ navigation }) => {
     const { currentUser } = useAuth();
 

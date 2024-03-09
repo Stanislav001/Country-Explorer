@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import styles from './filter.styles';
 import AppBar from '../../components/Reusable/AppBar';
-import reusable from '../../components/Reusable/reusable';
 import { COLORS, SIZES } from '../../constants/theme';
-import { View, Text, SafeAreaView, TouchableOpacity } from 'react-native';
-import { DescriptionText, ReusableBtn, ReusableText } from '../../components';
-import { AntDesign, FontAwesome, MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
-import CustomSlider from '../../components/Reusable/CustomSlider';
 import hotelService from '../../services/hotelService';
+import reusable from '../../components/Reusable/reusable';
+import CustomSlider from '../../components/Reusable/CustomSlider';
+import { DescriptionText, ReusableBtn, ReusableText } from '../../components';
+import { View, Text, SafeAreaView, TouchableOpacity, ScrollView } from 'react-native';
+import { AntDesign, FontAwesome, MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 
 const ratingData = [1, 2, 3, 4, 5];
 const amenitiesData = [
@@ -18,8 +18,7 @@ const amenitiesData = [
 ];
 
 const Filter = ({ navigation }) => {
-    const [toValue, setToValue] = useState(300);
-    const [fromValue, setFromValue] = useState(20);
+    const [priceRange, setPriceRange] = useState([50, 200]);
     const [selectedAmenities, setSelectedAmenities] = useState([]);
     const [selectedStarOption, setSelectedStarOption] = useState('');
 
@@ -32,13 +31,15 @@ const Filter = ({ navigation }) => {
     };
 
     const applyFilterHandler = async () => {
-        const resultData = await hotelService.filterHotel(fromValue, toValue, selectedStarOption, selectedAmenities);
+        const resultData = await hotelService.filterHotel(priceRange[0], priceRange[1], selectedStarOption, selectedAmenities);
 
         navigation.navigate('HotelSearch', { resultData })
     }
 
+    const handleSliderChange = (values) => setPriceRange(values);
+
     return (
-        <SafeAreaView>
+        <SafeAreaView style={{ flex: 1 }}>
             <View style={{ height: 50 }}>
                 <AppBar
                     top={10}
@@ -50,7 +51,7 @@ const Filter = ({ navigation }) => {
                 />
             </View>
 
-            <View style={styles.container}>
+            <ScrollView style={styles.container}>
                 <DescriptionText text={'Tailor your hotel search effortlessly by adjusting filters such as price range, amenities, and location. Find the perfect accommodation that suits your preferences and budget, ensuring a personalized and enjoyable travel experience'} />
 
                 <View style={{ padding: 10 }}>
@@ -60,9 +61,9 @@ const Filter = ({ navigation }) => {
                         color={COLORS.gray}
                         text={'Price Range'} />
 
-                    <CustomSlider toValue={toValue} setToValue={setToValue} fromValue={fromValue} setFromValue={setFromValue} />
+                    <CustomSlider handleSliderChange={handleSliderChange} priceRange={priceRange} />
 
-                    <View style={{ borderBottomColor: COLORS.lightGrey, marginTop: 80, marginBottom: 15, borderBottomWidth: 1 }} />
+                    <View style={{ borderBottomColor: COLORS.lightGrey, marginVertical: 15, borderBottomWidth: 1 }} />
 
                     <ReusableText
                         family={'regular'}
@@ -113,7 +114,7 @@ const Filter = ({ navigation }) => {
                     backgroundColor={COLORS.green}
                     onPress={() => applyFilterHandler()}
                 />
-            </View>
+            </ScrollView>
         </SafeAreaView>
     )
 }

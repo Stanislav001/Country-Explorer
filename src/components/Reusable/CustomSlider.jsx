@@ -1,29 +1,33 @@
 import reusable from './reusable';
-import { Text, View } from 'react-native';
-import RangeSlider from 'react-native-range-slider-expo';
+import { View } from 'react-native';
 import ReusableText from './ReusableText';
 import { SIZES, COLORS } from '../../constants/theme';
+import MultiSlider from '@ptomasroos/react-native-multi-slider';
 
-const CustomSlider = ({ fromValue, setFromValue, toValue, setToValue }) => {
+const CustomSlider = ({ handleSliderChange, priceRange }) => {
     return (
         <View>
-            <RangeSlider
-                min={20}
-                max={300}
-                step={10}
-                barHeight={6}
-                styleSize='small'
-                initialFromValue={11}
-                toValueOnChange={value => setToValue(value)}
-                fromValueOnChange={value => setFromValue(value)}
-            />
-            <View style={[reusable.rowWithSpace('space-between'), { marginTop: 10 }]}>
+            <View style={[reusable.rowWithSpace('space-between')]}>
                 <ReusableText
                     family={'regular'}
                     size={SIZES.medium}
                     color={COLORS.black}
-                    text={`${fromValue}$ - ${toValue}$`} />
+                    text={`${priceRange[0]}$ - ${priceRange[1]}$`} />
             </View>
+
+            <MultiSlider
+                snapped
+                min={20}
+                max={300}
+                step={10}
+                sliderLength={280}
+                values={priceRange}
+                allowOverlap={false}
+                onValuesChange={handleSliderChange}
+                markerStyle={{ backgroundColor: '#387ADF', height: 25, width: 25 }}
+                selectedStyle={{ backgroundColor: '#387ADF' }}
+            />
+
         </View>
     );
 }

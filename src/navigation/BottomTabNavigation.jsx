@@ -2,9 +2,9 @@
 import TopTab from './TopTab';
 import { COLORS } from '../constants/theme';
 import { Ionicons } from '@expo/vector-icons'
-import { Home, Chat, Location, Filter } from '../screens';
+import { Home, Location } from '../screens';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { getFocusedRouteNameFromRoute, useNavigation } from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
 
@@ -50,18 +50,6 @@ const BottomTabNavigation = ({ route }) => {
                     headerShown: false,
                     tabBarIcon: ({ focused }) => (
                         <Ionicons name={focused ? 'location' : 'location-outline'} color={focused ? COLORS.red : COLORS.gray} size={26} />
-                    )
-                }} />
-
-            <Tab.Screen
-                name='Chat'
-                component={Filter}
-                options={{
-                    tabBarStyle: tabBarStyle,
-                    tabBarShowLabel: false,
-                    headerShown: false,
-                    tabBarIcon: ({ focused }) => (
-                        <Ionicons name={focused ? 'chatbubble-ellipses' : 'chatbubble-ellipses-outline'} color={focused ? COLORS.red : COLORS.gray} size={26} />
                     )
                 }} />
 

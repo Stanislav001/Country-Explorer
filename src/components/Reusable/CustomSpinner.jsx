@@ -1,21 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View, StyleSheet, Animated } from 'react-native';
+import { COLORS, SIZES } from '../../constants/theme';
 
-const SIZE = 15;
-const MARGIN = 5;
-const BG = 'rgb(172, 172, 172)';
-const ACTIVE_BG = '#808184';
 const INTERVAL = 300;
 const ANIMATION_DURATION = 400;
 const ANIMATION_SCALE = 1.4;
 
 const CustomSpinner = ({
-    dotCount = 3,
-    backgroundOpacity = 0.5,
-    dotSize = SIZE,
-    dotMargin = MARGIN,
-    background = BG,
-    activeBackground = ACTIVE_BG,
+    dotCount = 4,
+    backgroundOpacity = 0.7,
+    dotSize = SIZES.medium,
+    dotMargin = 5,
+    background = COLORS.lightWhite,
+    activeBackground = COLORS.lightBlue,
 }) => {
     const [active, setActive] = useState(1);
 
@@ -78,7 +75,7 @@ const Dot = ({
         width: size,
         borderRadius: size / 2,
         marginHorizontal: margin,
-        backgroundColor: active ? activeBackground : background,
+        backgroundColor: active ? activeBackground : COLORS.lightBlue,
         transform: [{ scale }],
     };
 
