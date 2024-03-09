@@ -10,7 +10,7 @@ import { useGetFavoriteHotels } from '../../hooks/useHotel';
 import useRefreshControl from '../../hooks/useRefreshControl';
 import ReusableTitle from '../../components/Reusable/ReusableTitle';
 import { View, FlatList, ActivityIndicator, RefreshControl } from 'react-native';
-
+import CustomSpinner from '../../components/Reusable/CustomSpinner';
 const TopFavorites = ({ navigation }) => {
   const { currentToken } = useAuth();
   const { data: hotels, isLoading: isLoadingHotels, error: hotelsError, refetch } = useGetFavoriteHotels(currentToken);
@@ -23,7 +23,7 @@ const TopFavorites = ({ navigation }) => {
   );
 
   if (isLoadingHotels) {
-    return <ActivityIndicator size={SIZES.xxLarge} color={COLORS.lightBlue} />
+    return <CustomSpinner />
   }
 
   const removeFavoritesHandler = async (hotelId) => {

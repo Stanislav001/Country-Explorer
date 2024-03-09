@@ -3,7 +3,8 @@ import { useRoute } from '@react-navigation/native';
 import AppBar from '../../components/Reusable/AppBar';
 import reusable from '../../components/Reusable/reusable';
 import { COLORS, TEXT, SIZES } from '../../constants/theme';
-import { ScrollView, View, TouchableOpacity, StyleSheet, ActivityIndicator } from 'react-native';
+import CustomSpinner from '../../components/Reusable/CustomSpinner';
+import { ScrollView, View, TouchableOpacity, StyleSheet } from 'react-native';
 import { NetworkImage, PopularList, ReusableBtn, ReusableText, DescriptionText, HeightSpacer } from '../../components/index';
 
 const PlaceDetails = ({ navigation }) => {
@@ -12,13 +13,13 @@ const PlaceDetails = ({ navigation }) => {
     const { data: place, isLoading: isLoadingPlace, error: placeError, } = useGetPlace(id);
 
     if (isLoadingPlace) {
-        return <ActivityIndicator size={SIZES.xxLarge} color={COLORS.lightBlue} />
+        return <CustomSpinner />
     }
 
     return (
         <ScrollView>
             <View>
-                <NetworkImage source={place?.imageUrl} width={'100%'} height={350} borderRadius={30} />
+                <NetworkImage source={place?.imageUrl} width={'100%'} height={350} borderRadius={0} />
 
                 <AppBar
                     top={40}

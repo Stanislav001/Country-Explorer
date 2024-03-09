@@ -4,19 +4,13 @@ import { Feather } from '@expo/vector-icons';
 import { HeightSpacer } from '../../components/index';
 import { ReusableText } from '../../components/index';
 import { useNavigation } from '@react-navigation/native';
-import { useGetRandomPlaces } from '../../hooks/usePlace';
 import { COLORS, SIZES, TEXT, } from '../../constants/theme';
+import { View, TouchableOpacity, FlatList } from 'react-native';
 import ReusableTitle from '../../components/Reusable/ReusableTitle';
-import { View, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native';
 
-const Recommendations = () => {
+const Recommendations = ({ places }) => {
   const navigation = useNavigation();
   const [show, setShow] = useState(true);
-  const { data: places, isLoading: isLoadingPlaces, error: placesError, } = useGetRandomPlaces();
-
-  if (isLoadingPlaces) {
-    return <ActivityIndicator size={SIZES.xxLarge} color={COLORS.lightBlue} />
-  }
 
   return (
     <View style={{ paddingTop: 30, }}>
@@ -48,7 +42,7 @@ const Recommendations = () => {
         contentContainerStyle={{ columnGap: SIZES.medium }}
         renderItem={({ item }) => (
           <View style={{ marginRight: SIZES.medium }}>
-            <ReusableTitle item={item} cardTitle={true} onPress={() => navigation.navigate('PlaceDetails', item._id)} />
+            <ReusableTitle item={item} type={"place"} onPress={() => navigation.navigate('PlaceDetails', item._id)} />
           </View>
         )}
       /> : null}

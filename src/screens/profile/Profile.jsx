@@ -1,10 +1,11 @@
 import { useState } from 'react';
+import { COLORS } from '../../constants/theme';
 import { useAuth } from '../../context/auth-context';
-import { SIZES, COLORS } from '../../constants/theme';
-import { useGetMonthlyExpenses } from '../../hooks/useBooking'
 import AppBar from '../../components/Reusable/AppBar';
+import { useGetMonthlyExpenses } from '../../hooks/useBooking';
+import { View, ScrollView, Dimensions, Text } from 'react-native'
+import CustomSpinner from '../../components/Reusable/CustomSpinner';
 import { MonthlyExpensesOptions, MonthlyExpensesChart } from '../../components';
-import { View, ScrollView, ActivityIndicator, Dimensions, Text } from 'react-native'
 
 const ProfileInfo = ({ navigation }) => {
     const { currentToken } = useAuth();
@@ -12,9 +13,8 @@ const ProfileInfo = ({ navigation }) => {
     const { data: expensesData, isLoading: isExpensesData, error: expensesError } = useGetMonthlyExpenses(currentToken, selectedDuration);
 
     if (isExpensesData) {
-        return <ActivityIndicator size={SIZES.xxLarge} color={COLORS.lightBlue} />;
+        return <CustomSpinner />;
     }
-
 
     const labels = expensesData?.data?.map((monthData) => `${monthData.month}`);
     const data = expensesData?.data?.map((monthData) => Math.round(monthData.totalSpending));

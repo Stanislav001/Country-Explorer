@@ -3,6 +3,7 @@ import AppBar from '../../components/Reusable/AppBar';
 import { COLORS, SIZES } from '../../constants/theme';
 import useRefreshControl from '../../hooks/useRefreshControl';
 import ReusableTitle from '../../components/Reusable/ReusableTitle';
+import CustomSpinner from '../../components/Reusable/CustomSpinner';
 import { View, FlatList, SafeAreaView, ActivityIndicator, RefreshControl } from 'react-native';
 
 const Recommended = ({ navigation }) => {
@@ -10,7 +11,7 @@ const Recommended = ({ navigation }) => {
   const { refreshing, onRefresh } = useRefreshControl(refetch);
 
   if (isLoadingPlaces) {
-    return <ActivityIndicator size={SIZES.xxLarge} color={COLORS.lightBlue} />
+    return <CustomSpinner />
   }
 
   return (
@@ -37,7 +38,7 @@ const Recommended = ({ navigation }) => {
           contentContainerStyle={{ columnGap: SIZES.medium }}
           renderItem={({ item }) => (
             <View style={{ marginBottom: 10 }}>
-              <ReusableTitle item={item} onPress={() => navigation.navigate('PlaceDetails', item._id)} />
+              <ReusableTitle item={item} type={"place"} onPress={() => navigation.navigate('PlaceDetails', item._id)} />
             </View>
           )}
           refreshControl={

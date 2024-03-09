@@ -2,9 +2,10 @@ import { useRoute } from '@react-navigation/native';
 import AppBar from '../../components/Reusable/AppBar';
 import { COLORS, SIZES } from '../../constants/theme';
 import { useGetHotelRooms } from '../../hooks/useHotel';
+import { View, FlatList, StyleSheet } from 'react-native';
 import { HeightSpacer, ReusableBtn } from '../../components';
+import CustomSpinner from '../../components/Reusable/CustomSpinner';
 import ReusableTitle from '../../components/Reusable/ReusableTitle';
-import { View, FlatList, StyleSheet, ActivityIndicator } from 'react-native';
 
 const SelectRoom = ({ navigation }) => {
     const route = useRoute();
@@ -12,7 +13,7 @@ const SelectRoom = ({ navigation }) => {
     const { data, isLoading: isLoadingRooms, error: roomsError, } = useGetHotelRooms(id);
 
     if (isLoadingRooms) {
-        return <ActivityIndicator size={SIZES.xxLarge} color={COLORS.lightBlue} />
+        return <CustomSpinner />
     }
 
     return (

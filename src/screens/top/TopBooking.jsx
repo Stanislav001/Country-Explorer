@@ -7,8 +7,9 @@ import reusable from '../../components/Reusable/reusable';
 import { useFocusEffect } from '@react-navigation/native';
 import { useGetBookingData } from '../../hooks/useBooking';
 import useRefreshControl from '../../hooks/useRefreshControl';
+import { View, FlatList, RefreshControl } from 'react-native';
+import CustomSpinner from '../../components/Reusable/CustomSpinner';
 import ReusableTitle from '../../components/Reusable/ReusableTitle';
-import { View, FlatList, ActivityIndicator, RefreshControl } from 'react-native';
 
 const TopBooking = ({ navigation }) => {
     const { currentToken } = useAuth();
@@ -22,7 +23,7 @@ const TopBooking = ({ navigation }) => {
     );
 
     if (isLoadingHotels) {
-        return <ActivityIndicator size={SIZES.xxLarge} color={COLORS.lightBlue} />
+        return <CustomSpinner />
     }
 
     return (

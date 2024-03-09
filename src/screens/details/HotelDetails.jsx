@@ -2,15 +2,16 @@
 import styles from './hotelDetails.style';
 import { useGetHotel } from '../../hooks/useHotel';
 import { useRoute } from '@react-navigation/native';
+import { useAuth } from '../../context/auth-context';
 import AppBar from '../../components/Reusable/AppBar';
 import { COLORS, SIZES } from '../../constants/theme';
+import hotelService from '../../services/hotelService';
 import { Rating } from 'react-native-stock-star-rating';
 import { Feather, AntDesign } from '@expo/vector-icons';
 import reusable from '../../components/Reusable/reusable';
-import { View, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, ScrollView, TouchableOpacity } from 'react-native';
+import CustomSpinner from '../../components/Reusable/CustomSpinner';
 import { DescriptionText, HotelMap, HeightSpacer, NetworkImage, ReusableText, ReviewsList, ReusableBtn } from '../../components';
-import { useAuth } from '../../context/auth-context';
-import hotelService from '../../services/hotelService';
 
 const HotelDetails = ({ navigation }) => {
     const route = useRoute();
@@ -19,7 +20,7 @@ const HotelDetails = ({ navigation }) => {
     const { data: hotel, isLoading: isLoadingHotel, error: hotelError, refetch } = useGetHotel(id, currentToken);
 
     if (isLoadingHotel) {
-        return <ActivityIndicator size={SIZES.xxLarge} color={COLORS.lightBlue} />
+        return <CustomSpinner />
     }
 
     const addToFavoritesHandler = async () => {

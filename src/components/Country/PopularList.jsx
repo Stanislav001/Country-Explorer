@@ -14,6 +14,7 @@ const PopularList = ({ data, type, location }) => {
                             ...item,
                             ...(location ? { location } : {}),
                         }}
+                        type={type}
                         onPress={() => {
                             type === 'hotel'
                                 ? navigation.navigate('HotelDetails', item._id)

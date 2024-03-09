@@ -20,11 +20,19 @@ const amenitiesData = [
 const Filter = ({ navigation }) => {
     const [toValue, setToValue] = useState(300);
     const [fromValue, setFromValue] = useState(20);
-    const [selectedAmenities, setSelectedAmenities] = useState('');
+    const [selectedAmenities, setSelectedAmenities] = useState([]);
     const [selectedStarOption, setSelectedStarOption] = useState('');
 
+    const toggleAmenitySelection = (amenity) => {
+        if (selectedAmenities.includes(amenity)) {
+            setSelectedAmenities(prevSelection => prevSelection.filter(item => item !== amenity));
+        } else {
+            setSelectedAmenities(prevSelection => [...prevSelection, amenity]);
+        }
+    };
+
     const applyFilterHandler = async () => {
-        const resultData = await hotelService.filterHotel(fromValue, toValue, selectedStarOption);
+        const resultData = await hotelService.filterHotel(fromValue, toValue, selectedStarOption, selectedAmenities);
 
         navigation.navigate('HotelSearch', { resultData })
     }
@@ -84,8 +92,8 @@ const Filter = ({ navigation }) => {
 
                     <View style={reusable.rowWithSpace('center')}>
                         {amenitiesData?.map((data, index) => (
-                            <TouchableOpacity key={index} style={{ alignItems: 'center' }} onPress={() => setSelectedAmenities((prevOption) => (prevOption === data?.text ? '' : data?.text))}>
-                                <View style={styles.circle(selectedAmenities === data?.text)}>
+                            <TouchableOpacity key={index} style={{ alignItems: 'center' }} onPress={() => toggleAmenitySelection(data?.text)}>
+                                <View style={styles.circle(selectedAmenities.includes(data?.text))}>
                                     {data?.icon}
                                 </View>
                                 <Text style={styles.text}>{data?.text}</Text>

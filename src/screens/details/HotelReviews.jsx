@@ -3,8 +3,9 @@ import { useGetReviews } from '../../hooks/useHotel';
 import AppBar from '../../components/Reusable/AppBar';
 import { COLORS, SIZES } from '../../constants/theme';
 import useRefreshControl from '../../hooks/useRefreshControl';
-import { ReviewsList, HeightSpacer, ReviewTitle } from '../../components';
-import { View, SafeAreaView, ActivityIndicator, ScrollView, RefreshControl, FlatList } from 'react-native';
+import { HeightSpacer, ReviewTitle } from '../../components';
+import CustomSpinner from '../../components/Reusable/CustomSpinner';
+import { View, SafeAreaView, RefreshControl, FlatList } from 'react-native';
 
 const HotelReviews = ({ navigation }) => {
     const route = useRoute();
@@ -13,7 +14,7 @@ const HotelReviews = ({ navigation }) => {
     const { refreshing, onRefresh } = useRefreshControl(refetch);
 
     if (isLoadingHotels) {
-        return <ActivityIndicator size={SIZES.xxLarge} color={COLORS.lightBlue} />
+        return <CustomSpinner />
     }
 
     return (

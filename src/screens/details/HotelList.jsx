@@ -3,14 +3,15 @@ import AppBar from '../../components/Reusable/AppBar';
 import { COLORS, SIZES } from '../../constants/theme';
 import useRefreshControl from '../../hooks/useRefreshControl';
 import ReusableTitle from '../../components/Reusable/ReusableTitle';
-import { View, FlatList, SafeAreaView, ActivityIndicator, RefreshControl } from 'react-native';
+import CustomSpinner from '../../components/Reusable/CustomSpinner';
+import { View, FlatList, SafeAreaView, RefreshControl } from 'react-native';
 
 const HotelList = ({ navigation }) => {
     const { data: hotels, isLoading: isLoadingHotels, error: hotelsError, refetch } = useGetHotels();
     const { refreshing, onRefresh } = useRefreshControl(refetch);
 
     if (isLoadingHotels) {
-        return <ActivityIndicator size={SIZES.xxLarge} color={COLORS.lightBlue} />
+        return <CustomSpinner />
     }
 
     return (
