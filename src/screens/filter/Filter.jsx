@@ -14,7 +14,7 @@ const amenitiesData = [
     { text: '24h Front-Desk', icon: <AntDesign name="infocirlceo" size={18} color="black" /> },
     { text: 'Free Parking', icon: <MaterialCommunityIcons name="parking" size={18} color="black" /> },
     { text: 'Free Wi-Fi Zone', icon: <AntDesign name="wifi" size={18} color="black" /> },
-    { text: 'Pub Restaurant', icon: <Ionicons name="md-restaurant-sharp" size={18} color="black" /> },
+    { text: 'Pub Restaurant', icon: <AntDesign name="rest" size={18} color="black" /> },
 ];
 
 const Filter = ({ navigation }) => {

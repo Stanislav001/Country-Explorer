@@ -120,39 +120,39 @@ const hotelService = {
       throw error;
     }
   },
-  checkFavoriteStatus: async (userId, hotelId) => {
-    try {
-      const response = await request.get(
-        `/checkFavorite?userId=${userId}&hotelId=${hotelId}`
-      );
+  // checkFavoriteStatus: async (userId, hotelId) => {
+  //   try {
+  //     const response = await request.get(
+  //       `/checkFavorite?userId=${userId}&hotelId=${hotelId}`
+  //     );
 
-      if (response.status === 200) {
-        setIsFavorite(response.data.isFavorite);
-      } else {
-        throw new Error("Something went wrong");
-      }
-    } catch (error) {
-      throw error;
-    }
-  },
-  getHotels: async (page, perPage) => {
-    try {
-      const response = await request.get("/hotels", {
-        params: {
-          page: page,
-          perPage: perPage,
-        },
-      });
+  //     if (response.status === 200) {
+  //       setIsFavorite(response.data.isFavorite);
+  //     } else {
+  //       throw new Error("Something went wrong");
+  //     }
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // },
+  // getHotels: async (page, perPage) => {
+  //   try {
+  //     const response = await request.get("/hotels", {
+  //       params: {
+  //         page: page,
+  //         perPage: perPage,
+  //       },
+  //     });
 
-      if (response.status === 200) {
-        return response.data;
-      } else {
-        throw new Error("Something went wrong");
-      }
-    } catch (error) {
-      throw error;
-    }
-  },
+  //     if (response.status === 200) {
+  //       return response.data;
+  //     } else {
+  //       throw new Error("Something went wrong");
+  //     }
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // },
   getFavoriteHotels: async (token) => {
     const config = {
       headers: {

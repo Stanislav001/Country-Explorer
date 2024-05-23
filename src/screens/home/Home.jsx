@@ -20,9 +20,9 @@ const Home = ({ navigation }) => {
     const { data: countries, isLoading: isLoadingCountries, error: countriesError, } = useGetCountries();
 
     if (isLoadingPlaces || isLoadingHotels || isLoadingCountries) {
-        setTimeout(() => {
+        // setTimeout(() => {
 
-        }, 300000);
+        // }, 300000);
         return <CustomSpinner />
     }
 

@@ -20,10 +20,6 @@ const styles = StyleSheet.create({
     margin: 10,
     borderRadius: 5,
   }),
-  number: {
-    fontSize: 18,
-    fontWeight: "bold",
-  },
   icon: {
     marginTop: 5,
   },

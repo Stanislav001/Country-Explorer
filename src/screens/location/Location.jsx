@@ -104,7 +104,9 @@ const Location = () => {
             </Modal>
             <TouchableOpacity
                 style={styles.backButton}
-                onPress={() => navigation.goBack()}
+                onPress={() => {
+                    navigation.goBack();
+                }}
             >
                 <FontAwesome5 name="arrow-left" size={20} />
             </TouchableOpacity>
@@ -131,7 +133,7 @@ const styles = StyleSheet.create({
     },
     backButton: {
         position: 'absolute',
-        top: 16,
+        top: 50,
         left: 16,
         padding: 10,
         backgroundColor: COLORS.white,

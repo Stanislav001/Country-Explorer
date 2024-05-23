@@ -6,6 +6,7 @@ import useRefreshControl from '../../hooks/useRefreshControl';
 import { HeightSpacer, ReviewTitle } from '../../components';
 import CustomSpinner from '../../components/Reusable/CustomSpinner';
 import { View, SafeAreaView, RefreshControl, FlatList } from 'react-native';
+import ReusableText from '../../components';
 
 const HotelReviews = ({ navigation }) => {
     const route = useRoute();
