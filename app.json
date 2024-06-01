@@ -11,16 +11,10 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "jsEngine": "hermes",
     "ios": {
-      "jsEngine": "jsc",
       "supportsTablet": true
     },
     "android": {
-      "jsEngine": "jsc",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
