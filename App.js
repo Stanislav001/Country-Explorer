@@ -27,6 +27,7 @@ import {
   Recommended,
   Failed,
   Filter,
+  ResetPassword,
 } from "./src/screens";
 
 const Stack = createNativeStackNavigator();
@@ -162,6 +163,14 @@ export default function App() {
           name="ChangePassword"
           component={ChangePassword}
           options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="ResetPassword"
+          component={ResetPassword}
+          options={{
+            headerShown: false,
+          }}
         />
         <Stack.Screen
           name="Filter"

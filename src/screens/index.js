@@ -28,6 +28,7 @@ import ForgotPassword from "./authentication/ForgotPassword";
 import CheckToken from "./authentication/CheckToken";
 import ChangePassword from "./authentication/ChangePassword";
 import Filter from "./filter/Filter";
+import ResetPassword from "./authentication/ResetPassword";
 
 export {
   Onboarding,
@@ -60,4 +61,5 @@ export {
   CheckToken,
   ChangePassword,
   Filter,
+  ResetPassword,
 };
