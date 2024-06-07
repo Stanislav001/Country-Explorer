@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FontAwesome } from '@expo/vector-icons';
 import { useRoute } from '@react-navigation/native';
 import { useAuth } from '../../context/auth-context';
@@ -11,6 +11,7 @@ import reusable from '../../components/Reusable/reusable';
 import { createPaymentIntent } from '../../services/paymentService';
 import { StyleSheet, View, Alert, TouchableOpacity } from 'react-native';
 import { HeightSpacer, Counter, NetworkImage, ReusableBtn, ReusableText, ReusableCalendar, WidthSpacer, AssetImage } from '../../components';
+import hotelService from '../../services/hotelService';
 
 const SelectedRoom = ({ navigation }) => {
     const router = useRoute();
@@ -23,6 +24,19 @@ const SelectedRoom = ({ navigation }) => {
     const [startDate, setStartDate] = useState();
     const [errorMessage, setErrorMessage] = useState('');
     const [showCalendar, setShowCalendar] = useState(false);
+    const [busyDates, setBusyDates] = useState([]);
+
+    useEffect(() => {
+        const getBusyDates = async () => {
+            const response = await hotelService.getBusyDates(item?._id);
+
+            if (response?.data) {
+                setBusyDates(response?.data);
+            }
+        }
+
+        getBusyDates();
+    }, []);
 
     const onDateSelection = async (start, end) => {
         setStartDate(new Date(start).toISOString().split('T')[0]);
@@ -210,7 +224,7 @@ const SelectedRoom = ({ navigation }) => {
                 </View>
             </View>
 
-            <ReusableCalendar visible={showCalendar} setVisible={setShowCalendar} onDateSelection={onDateSelection} />
+            <ReusableCalendar visible={showCalendar} setVisible={setShowCalendar} onDateSelection={onDateSelection} busyDates={busyDates} />
         </View>
     )
 }

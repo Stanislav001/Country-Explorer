@@ -1,4 +1,5 @@
 import { request } from "../helpers/request";
+import * as SecureStore from "expo-secure-store";
 
 const hotelService = {
   getHotels: async (page, perPage) => {
@@ -120,39 +121,7 @@ const hotelService = {
       throw error;
     }
   },
-  // checkFavoriteStatus: async (userId, hotelId) => {
-  //   try {
-  //     const response = await request.get(
-  //       `/checkFavorite?userId=${userId}&hotelId=${hotelId}`
-  //     );
 
-  //     if (response.status === 200) {
-  //       setIsFavorite(response.data.isFavorite);
-  //     } else {
-  //       throw new Error("Something went wrong");
-  //     }
-  //   } catch (error) {
-  //     throw error;
-  //   }
-  // },
-  // getHotels: async (page, perPage) => {
-  //   try {
-  //     const response = await request.get("/hotels", {
-  //       params: {
-  //         page: page,
-  //         perPage: perPage,
-  //       },
-  //     });
-
-  //     if (response.status === 200) {
-  //       return response.data;
-  //     } else {
-  //       throw new Error("Something went wrong");
-  //     }
-  //   } catch (error) {
-  //     throw error;
-  //   }
-  // },
   getFavoriteHotels: async (token) => {
     const config = {
       headers: {
@@ -199,6 +168,26 @@ const hotelService = {
       }
 
       const response = await request.get(url);
+
+      if (response.status === 200) {
+        return response.data;
+      } else {
+        throw new Error("Something went wrong");
+      }
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  getBusyDates: async (roomId) => {
+    try {
+      const token = await SecureStore.getItemAsync("token");
+
+      const response = await request.get(`/book/busyDates/${roomId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       if (response.status === 200) {
         return response.data;
