@@ -18,8 +18,8 @@ const Location = () => {
     const { data: hotels, isLoading: isLoadingHotels } = useGetHotels();
 
     const defaultRegion = {
-        latitude: 43.71667,
-        longitude: 26.83333,
+        latitude: 43.075672,
+        longitude: 25.617151,
         latitudeDelta: 0.01,
         longitudeDelta: 0.01,
     };

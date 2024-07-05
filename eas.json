@@ -1,0 +1,17 @@
+{
+    "build": {
+      "production": {
+        "releaseChannel": "default",
+        "developmentClient": false,
+        "distribution": "store"
+      },
+      "development": {
+        "developmentClient": true,
+        "distribution": "internal"
+      }
+    },
+    "submit": {
+      "production": {}
+    }
+  }
+  
