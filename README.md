@@ -33,13 +33,13 @@ Follow these steps to set up the project locally:
    npm install
    ```
 
-3. **Install Expo CLI globally (if not already installed): **
+3. **Install Expo CLI globally (if not already installed):**
 
    ```bash
    npm install -g expo-cli
    ```
 
-4. **Start the development server: **
+4. **Start the development server:**
 
    ```bash
    npx expo start
