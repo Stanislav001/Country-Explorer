@@ -91,9 +91,3 @@ If you find this project useful, please consider giving it a star! It helps to s
 <img src="screenshots/sign-in.png" alt="Sign in screen" width="400" height="800">
 <img src="screenshots/sign-up.png" alt="Sign up screen" width="400" height="800">
 <img src="screenshots/filter-screen.png" alt="Filter screen" width="400" height="800">
-
-## Watch the Video
-
-**[⬇️ Click here to watch the demo video](screenshots/travel-video.webm)**
-
----
