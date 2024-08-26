@@ -82,5 +82,18 @@ If you find this project useful, please consider giving it a star! It helps to s
 
 ## 📸 Screenshots
 
-<img src="screenshots/wallpaper.png" alt="Screenshot 1" width="400">
-<img src="screenshots/profile-screen.png" alt="Screenshot 2" width="400">
+<img src="screenshots/wallpaper.png" alt="Wallpaper" width="400" height="250">
+<img src="screenshots/profile-screen.png" alt="Profile screens" width="400" height="250">
+<img src="screenshots/booking-screens.png" alt="Booking screens" width="400" height="250">
+<img src="screenshots/home-screen.png" alt="Home screen" width="400" height="800">
+<img src="screenshots/expenses-screen.png" alt="Expenses screen" width="400" height="800">
+<img src="screenshots/map-screen.png" alt="Map screen" width="400" height="800">
+<img src="screenshots/sign-in.png" alt="Sign in screen" width="400" height="800">
+<img src="screenshots/sign-up.png" alt="Sign up screen" width="400" height="800">
+<img src="screenshots/filter-screen.png" alt="Filter screen" width="400" height="800">
+
+## Watch the Video
+
+**[⬇️ Click here to watch the demo video](screenshots/travel-video.webm)**
+
+---
